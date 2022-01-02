@@ -13,12 +13,11 @@ public class mainFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("I am initialized!");
-        TheLabel.setText("Initialized!");
     }
 
     public void onButtonAction(ActionEvent actionEvent) {
         System.out.println("I am clicked");
-
-        TheLabel.setText("You Clicked It!");
     }
+
+
 }
