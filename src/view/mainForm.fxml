@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -11,9 +16,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" scaleShape="false" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainFormController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainFormController">
    <children>
-      <VBox alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0" text="Inventory Management System">
                <VBox.margin>
@@ -34,7 +39,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <TextField promptText="Search by Part ID or Name" />
+                              <TextField fx:id="partSearchTxt" promptText="Search by Part ID or Name" />
                            </children>
                            <VBox.margin>
                               <Insets />
@@ -43,19 +48,19 @@
                               <Insets left="10.0" />
                            </padding>
                         </HBox>
-                        <TableView prefHeight="200.0" prefWidth="200.0">
+                        <TableView fx:id="partTableView" prefHeight="200.0" prefWidth="200.0">
                           <columns>
-                            <TableColumn prefWidth="55.0" text="Part ID" />
-                            <TableColumn prefWidth="115.0" text="Part Name" />
-                              <TableColumn prefWidth="115.0" text="Inventory Level" />
-                              <TableColumn prefWidth="115.0" text="Price/Cost per Unit" />
+                            <TableColumn fx:id="partIdCol" prefWidth="70.0" text="Part ID" />
+                            <TableColumn fx:id="partNameCol" prefWidth="100.0" text="Part Name" />
+                              <TableColumn fx:id="partInventoryCol" prefWidth="110.0" text="Inventory Level" />
+                              <TableColumn fx:id="partPriceCol" prefWidth="120.0" text="Price/Cost per Unit" />
                           </columns>
                         </TableView>
                         <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" spacing="10.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Add" />
-                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Modify" />
-                              <Button layoutX="62.0" layoutY="10.0" mnemonicParsing="false" text="Delete" />
+                              <Button fx:id="addPartBtn" mnemonicParsing="false" text="Add" />
+                              <Button fx:id="modifyPartBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Modify" />
+                              <Button fx:id="deletePartBtn" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" text="Delete" />
                            </children>
                            <padding>
                               <Insets right="10.0" />
@@ -75,7 +80,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <TextField promptText="Search by Product ID or Name" />
+                              <TextField fx:id="productSearchTxt" promptText="Search by Product ID or Name" />
                            </children>
                            <VBox.margin>
                               <Insets />
@@ -84,19 +89,19 @@
                               <Insets left="10.0" />
                            </padding>
                         </HBox>
-                        <TableView prefHeight="200.0" prefWidth="200.0">
+                        <TableView fx:id="productTableView" prefHeight="200.0" prefWidth="200.0">
                            <columns>
-                              <TableColumn prefWidth="55.0" text="Part ID" />
-                              <TableColumn prefWidth="115.0" text="Part Name" />
-                              <TableColumn prefWidth="115.0" text="Inventory Level" />
-                              <TableColumn prefWidth="115.0" text="Price/Cost per Unit" />
+                              <TableColumn fx:id="productIdCol" prefWidth="70.0" text="Product ID" />
+                              <TableColumn fx:id="productNameCol" prefWidth="100.0" text="Product Name" />
+                              <TableColumn fx:id="productInventoryCol" prefWidth="110.0" text="Inventory Level" />
+                              <TableColumn fx:id="productPriceCol" prefWidth="120.0" text="Price/Cost per Unit" />
                            </columns>
                         </TableView>
                         <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" spacing="10.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Add" />
-                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Modify" />
-                              <Button layoutX="62.0" layoutY="10.0" mnemonicParsing="false" text="Delete" />
+                              <Button fx:id="addProductBtn" mnemonicParsing="false" text="Add" />
+                              <Button fx:id="modifyProductBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Modify" />
+                              <Button fx:id="deleteProductBtn" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" text="Delete" />
                            </children>
                            <padding>
                               <Insets right="10.0" />
@@ -115,7 +120,7 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <Button mnemonicParsing="false" text="Exit">
+            <Button fx:id="exitBtn" mnemonicParsing="false" text="Exit">
                <VBox.margin>
                   <Insets left="800.0" top="50.0" />
                </VBox.margin>
