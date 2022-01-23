@@ -1,23 +1,78 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class mainFormController implements Initializable {
-    public Label TheLabel;
+
+    @FXML
+    private TableColumn<?, ?> partPriceCol;
+
+    @FXML
+    private Button addProductBtn;
+
+    @FXML
+    private TableColumn<?, ?> productInventoryCol;
+
+    @FXML
+    private Button modifyPartBtn;
+
+    @FXML
+    private TextField partSearchTxt;
+
+    @FXML
+    private Button exitBtn;
+
+    @FXML
+    private Button modifyProductBtn;
+
+    @FXML
+    private TableView<?> partTableView;
+
+    @FXML
+    private TableColumn<?, ?> partInventoryCol;
+
+    @FXML
+    private TableColumn<?, ?> productIdCol;
+
+    @FXML
+    private Button deleteProductBtn;
+
+    @FXML
+    private TextField productSearchTxt;
+
+    @FXML
+    private TableColumn<?, ?> productNameCol;
+
+    @FXML
+    private TableView<?> productTableView;
+
+    @FXML
+    private Button addPartBtn;
+
+    @FXML
+    private Button deletePartBtn;
+
+    @FXML
+    private TableColumn<?, ?> partIdCol;
+
+    @FXML
+    private TableColumn<?, ?> partNameCol;
+
+    @FXML
+    private TableColumn<?, ?> productPriceCol;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("I am initialized!");
     }
-
-    public void onButtonAction(ActionEvent actionEvent) {
-        System.out.println("I am clicked");
-    }
-
-
 }

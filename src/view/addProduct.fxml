@@ -121,7 +121,7 @@
                               <HBox alignment="TOP_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                                  <children>
                                     <Button fx:id="saveBtn" mnemonicParsing="false" text="Save" />
-                                    <Button mnemonicParsing="false" text="Cancel" />
+                                    <Button fx:id="cancelBtn" mnemonicParsing="false" text="Cancel" />
                                  </children>
                                  <padding>
                                     <Insets top="10.0" />
