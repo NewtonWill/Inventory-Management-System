@@ -71,6 +71,42 @@ public class mainFormController implements Initializable {
     private TableColumn<?, ?> productPriceCol;
 
 
+    @FXML
+    void onActionAddPart(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionModifyPart(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionDeletePart(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionAddProduct(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionModifyProduct(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionDeleteProduct(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionExitProgram(ActionEvent event) {
+        System.out.println("Exit button Pressed");
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("I am initialized!");

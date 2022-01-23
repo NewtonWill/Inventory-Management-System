@@ -51,6 +51,16 @@ public class addPartController implements Initializable {
     @FXML
     private Button saveBtn;
 
+    @FXML
+    void onActionSavePart(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionGotoMainForm(ActionEvent event) {
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 

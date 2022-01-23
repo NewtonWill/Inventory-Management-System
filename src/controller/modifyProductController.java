@@ -69,6 +69,26 @@ public class modifyProductController implements Initializable {
     @FXML
     private Button saveBtn;
 
+    @FXML
+    void onActionAddAscPart(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionRemoveAscPart(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionSaveProduct(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionGotoMainForm(ActionEvent event) {
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 

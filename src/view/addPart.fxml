@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainFormController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainFormController">
    <children>
       <VBox prefHeight="600.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -64,8 +65,8 @@
             </GridPane>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
                <children>
-                  <Button fx:id="saveBtn" mnemonicParsing="false" text="Save" />
-                  <Button fx:id="cancelBtn" mnemonicParsing="false" text="Cancel" />
+                  <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#onActionSavePart" text="Save" />
+                  <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#onActionGotoMainForm" text="Cancel" />
                </children>
                <VBox.margin>
                   <Insets />

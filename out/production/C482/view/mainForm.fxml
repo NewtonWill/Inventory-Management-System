@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainFormController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" scaleShape="false" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainFormController">
    <children>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -58,9 +47,9 @@
                         </TableView>
                         <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" spacing="10.0">
                            <children>
-                              <Button fx:id="addPartBtn" mnemonicParsing="false" text="Add" />
-                              <Button fx:id="modifyPartBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Modify" />
-                              <Button fx:id="deletePartBtn" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" text="Delete" />
+                              <Button fx:id="addPartBtn" mnemonicParsing="false" onAction="#onActionAddPart" text="Add" />
+                              <Button fx:id="modifyPartBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionModifyPart" text="Modify" />
+                              <Button fx:id="deletePartBtn" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionDeletePart" text="Delete" />
                            </children>
                            <padding>
                               <Insets right="10.0" />
@@ -99,9 +88,9 @@
                         </TableView>
                         <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" spacing="10.0">
                            <children>
-                              <Button fx:id="addProductBtn" mnemonicParsing="false" text="Add" />
-                              <Button fx:id="modifyProductBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Modify" />
-                              <Button fx:id="deleteProductBtn" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" text="Delete" />
+                              <Button fx:id="addProductBtn" mnemonicParsing="false" onAction="#onActionAddProduct" text="Add" />
+                              <Button fx:id="modifyProductBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionModifyProduct" text="Modify" />
+                              <Button fx:id="deleteProductBtn" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionDeleteProduct" text="Delete" />
                            </children>
                            <padding>
                               <Insets right="10.0" />
@@ -120,7 +109,7 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <Button fx:id="exitBtn" mnemonicParsing="false" text="Exit">
+            <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#onActionExitProgram" text="Exit">
                <VBox.margin>
                   <Insets left="800.0" top="50.0" />
                </VBox.margin>
