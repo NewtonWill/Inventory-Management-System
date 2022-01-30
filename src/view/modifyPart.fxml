@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainFormController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.modifyPartController">
    <children>
       <VBox prefHeight="600.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -17,8 +16,11 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <RadioButton fx:id="inhouseRadio" mnemonicParsing="false" text="In-House" />
-                  <RadioButton fx:id="outsourcedRadio" mnemonicParsing="false" text="Outsourced" />
+                  <RadioButton fx:id="inhouseRadio" mnemonicParsing="false" text="In-House">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="sourceTG" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="outsourcedRadio" mnemonicParsing="false" text="Outsourced" toggleGroup="$sourceTG" />
                </children>
                <VBox.margin>
                   <Insets />
