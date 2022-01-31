@@ -1,8 +1,11 @@
 package model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class Product {
 
-    private Part associatedParts; //#fixme
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     private int id;
     private String name;
     private double price;
@@ -17,14 +20,6 @@ public class Product {
         this.stock = stock;
         this.min = min;
         this.max = max;
-    }
-
-    public Part getAssociatedParts() {
-        return associatedParts;
-    }
-
-    public void setAssociatedParts(Part associatedParts) {
-        this.associatedParts = associatedParts;
     }
 
     public int getId() {
@@ -76,7 +71,7 @@ public class Product {
     }
 
     public void addAssociatedPart(Part part) {
-        //fixme
+        associatedParts.add(part);
     }
 
     public boolean deleteAssociatedPart(Part selectedAssociatedPart) {
@@ -84,8 +79,8 @@ public class Product {
         return true;
     }
 
-    /*public ObservableList<Part> getAllAssociatedParts(){
-        fixme
-    }*/
+    public ObservableList<Part> getAllAssociatedParts() {
+        return associatedParts;
+    }
 
 }
