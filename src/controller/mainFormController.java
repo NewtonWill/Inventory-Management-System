@@ -10,7 +10,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Inventory;
+import model.Part;
+import model.Product;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,13 +26,13 @@ public class mainFormController implements Initializable {
     Parent scene;
 
     @FXML
-    private TableColumn<?, ?> partPriceCol;
+    private TableColumn<Part, Double> partPriceCol;
 
     @FXML
     private Button addProductBtn;
 
     @FXML
-    private TableColumn<?, ?> productInventoryCol;
+    private TableColumn<Product, Integer> productInventoryCol;
 
     @FXML
     private Button modifyPartBtn;
@@ -43,13 +47,13 @@ public class mainFormController implements Initializable {
     private Button modifyProductBtn;
 
     @FXML
-    private TableView<?> partTableView;
+    private TableView<Part> partTableView;
 
     @FXML
-    private TableColumn<?, ?> partInventoryCol;
+    private TableColumn<Part, Integer> partInventoryCol;
 
     @FXML
-    private TableColumn<?, ?> productIdCol;
+    private TableColumn<Product, Integer> productIdCol;
 
     @FXML
     private Button deleteProductBtn;
@@ -58,10 +62,10 @@ public class mainFormController implements Initializable {
     private TextField productSearchTxt;
 
     @FXML
-    private TableColumn<?, ?> productNameCol;
+    private TableColumn<Product, String> productNameCol;
 
     @FXML
-    private TableView<?> productTableView;
+    private TableView<Product> productTableView;
 
     @FXML
     private Button addPartBtn;
@@ -70,13 +74,13 @@ public class mainFormController implements Initializable {
     private Button deletePartBtn;
 
     @FXML
-    private TableColumn<?, ?> partIdCol;
+    private TableColumn<Part, Integer> partIdCol;
 
     @FXML
-    private TableColumn<?, ?> partNameCol;
+    private TableColumn<Part, String> partNameCol;
 
     @FXML
-    private TableColumn<?, ?> productPriceCol;
+    private TableColumn<Product, Double> productPriceCol;
 
 
     @FXML
@@ -138,6 +142,19 @@ public class mainFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        partTableView.setItems(Inventory.getAllParts());
+        productTableView.setItems(Inventory.getAllProducts());
+
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
     }
 }

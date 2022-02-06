@@ -12,7 +12,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 import javafx.fxml.Initializable;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Inventory;
+import model.Part;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,22 +28,22 @@ public class modifyProductController implements Initializable {
     Parent scene;
 
     @FXML
-    private TableColumn<?, ?> partPriceCol;
+    private TableColumn<Part, Double> partPriceCol;
 
     @FXML
     private TextField productInvTxt;
 
     @FXML
-    private TableColumn<?, ?> ascNameCol;
+    private TableColumn<Part, String> ascNameCol;
 
     @FXML
-    private TableColumn<?, ?> ascInventoryCol;
+    private TableColumn<Part, Integer> ascInventoryCol;
 
     @FXML
-    private TableColumn<?, ?> ascPriceCol;
+    private TableColumn<Part, Double> ascPriceCol;
 
     @FXML
-    private TableColumn<?, ?> partInventoryCol;
+    private TableColumn<Part, Integer> partInventoryCol;
 
     @FXML
     private TextField productPriceTxt;
@@ -55,7 +58,7 @@ public class modifyProductController implements Initializable {
     private TextField searchTxt;
 
     @FXML
-    private TableColumn<?, ?> ascIdCol;
+    private TableColumn<Part, Integer> ascIdCol;
 
     @FXML
     private Button removeAscBtn;
@@ -64,10 +67,10 @@ public class modifyProductController implements Initializable {
     private TextField productMinTxt;
 
     @FXML
-    private TableColumn<?, ?> partIdCol;
+    private TableColumn<Part, Integer> partIdCol;
 
     @FXML
-    private TableColumn<?, ?> partNameCol;
+    private TableColumn<Part, String> partNameCol;
 
     @FXML
     private TextField productIdTxt;
@@ -77,6 +80,12 @@ public class modifyProductController implements Initializable {
 
     @FXML
     private Button saveBtn;
+
+    @FXML
+    private TableView<Part> partTableView;
+
+    @FXML
+    private TableView<Part> ascTableView;
 
     @FXML
     void onActionAddAscPart(ActionEvent event) {
@@ -104,6 +113,13 @@ public class modifyProductController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        partTableView.setItems(Inventory.getAllParts());
+
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
     }
 
