@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Inventory;
+import model.Outsourced;
 import model.Part;
 import model.Product;
 
@@ -140,6 +141,40 @@ public class mainFormController implements Initializable {
     }
 
 
+
+
+    public boolean searchPart(int id){
+        for(Part part : Inventory.getAllParts()){
+            if(part.getId() == id){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean updatePart(int id, Part part){
+        int index = -1;
+
+        for(Part partX : Inventory.getAllParts()){
+            index++;
+
+            if(partX.getId() == id){
+                Inventory.getAllParts().set(index, part);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean deletePart(int id){
+        for(Part partX : Inventory.getAllParts()){
+            if(partX.getId() == id){
+                return Inventory.getAllParts().remove(partX);
+            }
+        }
+        return false;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -155,6 +190,21 @@ public class mainFormController implements Initializable {
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         productInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        /*if(searchPart(2))
+            System.out.println("Search found");
+        else
+            System.out.println("No search found");
+
+        if(updatePart(4, new Outsourced(8, "Hoops", 8.88, 8, 8, 8, "Hoopland")))
+            System.out.println("update success");
+        else
+            System.out.println("update unsuccessful!");
+
+        if(deletePart(10))
+            System.out.println("Delete successful");
+        else
+            System.out.println("Delete unsuccessful");*/
 
     }
 }
