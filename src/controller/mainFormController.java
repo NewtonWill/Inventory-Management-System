@@ -143,16 +143,25 @@ public class mainFormController implements Initializable {
 
 
 
-    public boolean searchPart(int id){
+    /*public boolean searchPart(int id){ //vestigial Implemented in Inventory: To be tested
         for(Part part : Inventory.getAllParts()){
             if(part.getId() == id){
                 return true;
             }
         }
         return false;
-    }
+    }*/
 
-    public boolean updatePart(int id, Part part){
+    /*public boolean searchProduct(int id){ //vestigial Implemented in Inventory: To be tested
+        for(Product product : Inventory.getAllProducts()){
+            if(product.getId() == id){
+                return true;
+            }
+        }
+        return false;
+    }*/
+
+    public boolean updatePart(int id, Part part){ //todo to be implemented in Inventory
         int index = -1;
 
         for(Part partX : Inventory.getAllParts()){
@@ -166,13 +175,52 @@ public class mainFormController implements Initializable {
         return false;
     }
 
-    public boolean deletePart(int id){
+    public boolean updateProduct(int id, Product product){ //todo to be implemented in Inventory
+        int index = -1;
+
+        for(Product productX : Inventory.getAllProducts()){
+            index++;
+
+            if(productX.getId() == id){
+                Inventory.getAllProducts().set(index, product);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean deletePart(int id){ //todo to be implemented in Inventory vestigial Testing
         for(Part partX : Inventory.getAllParts()){
             if(partX.getId() == id){
                 return Inventory.getAllParts().remove(partX);
             }
         }
         return false;
+    }
+
+    public boolean deleteProduct(int id){ //todo to be implemented in Inventory
+        for(Product productX : Inventory.getAllProducts()){
+            if(productX.getId() == id){
+                return Inventory.getAllProducts().remove(productX);
+            }
+        }
+        return false;
+    }
+
+    public Part selectPart(int partId){
+        for(Part part : Inventory.getAllParts()){
+            if(part.getId() == partId)
+                return part;
+        }
+        return null;
+    }
+
+    public Product selectProduct(int id){
+        for(Product product : Inventory.getAllProducts()){
+            if(product.getId() == id)
+                return product;
+        }
+        return null;
     }
 
     @Override
@@ -205,6 +253,10 @@ public class mainFormController implements Initializable {
             System.out.println("Delete successful");
         else
             System.out.println("Delete unsuccessful");*/
+
+        //partTableView.getSelectionModel().select(Inventory.lookupPart(2));
+
+        Inventory.deletePart(Inventory.lookupPart(5));
 
     }
 }
