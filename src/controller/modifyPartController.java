@@ -73,6 +73,16 @@ public class modifyPartController implements Initializable {
         stage.show();
     }
 
+    @FXML
+    void onActionInHouse() {
+        altIdLabel.setText("Machine ID");
+    }
+
+    @FXML
+    void onActionOutsourced() {
+        altIdLabel.setText("Company Name");
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

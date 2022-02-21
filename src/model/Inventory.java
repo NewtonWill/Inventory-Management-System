@@ -47,11 +47,35 @@ public class Inventory {
     }
 
     public static ObservableList<Part> lookupPart (String partName){
-        return null; //fixme
+
+        if(!(getFilteredParts().isEmpty()))
+            getFilteredParts().clear();
+
+        for(Part partx : getAllParts()){
+            if(partx.getName().contains(partName))
+                getFilteredParts().add(partx);
+        }
+
+        if(getFilteredParts().isEmpty())
+            return getAllParts();
+        else
+            return getFilteredParts();
     }
 
     public static ObservableList<Product> lookupProduct (String productName){
-        return null; //fixme
+
+        if(!(getFilteredProducts().isEmpty()))
+            getFilteredProducts().clear();
+
+        for(Product productx : getAllProducts()){
+            if(productx.getName().contains(productName))
+                getFilteredProducts().add(productx);
+        }
+
+        if(getFilteredParts().isEmpty())
+            return getAllProducts();
+        else
+            return getFilteredProducts();
     }
 
     public static void updatePart (int index, Part selectedPart){
@@ -67,10 +91,10 @@ public class Inventory {
         if (selectedPart == null)
             return false; //runtime used these lines to fix error when lookupPart() returned null
 
-        for(Part partX : Inventory.getAllParts()){
+        for(Part partX : getAllParts()){
             if(partX.getId() == selectedPart.getId()){
                 System.out.println("Part ID " + selectedPart.getId() + " Deleted");
-                return Inventory.getAllParts().remove(partX);
+                return getAllParts().remove(partX);
             }
         }
         System.out.println("Part ID " + selectedPart.getId() + " Not Found");
@@ -78,8 +102,26 @@ public class Inventory {
     }
 
     public static boolean deleteProduct (Product selectedProduct){
-        return true;
-        //todo transfer from mainformcontroller
+
+        if (selectedProduct == null) {
+            System.out.println("Selected Product is null. Delete aborted");
+            return false;
+        }
+
+        if (!(selectedProduct.getAllAssociatedParts().isEmpty())) {
+            System.out.println("Associated part(s) found. Delete aborted");
+            return false; //todo testing needed
+        }
+
+        for(Product productX : Inventory.getAllProducts()){
+            if(productX.getId() == selectedProduct.getId()){
+                System.out.println("Product ID " + selectedProduct.getId() + " Deleted");
+                return Inventory.getAllProducts().remove(productX);
+            }
+        }
+
+        System.out.println("Product ID " + selectedProduct.getId() + " Not Found");
+        return false;
     }
 
     public static ObservableList<Part> getAllParts() {

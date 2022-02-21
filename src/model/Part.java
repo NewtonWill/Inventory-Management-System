@@ -24,6 +24,13 @@ public abstract class Part {
         this.max = max;
     }
 
+    public static int nextPartId = 5000;
+
+    public static int getNextPartId(){
+        nextPartId++;
+        return nextPartId;
+    }
+
     /**
      * @return the id
      */

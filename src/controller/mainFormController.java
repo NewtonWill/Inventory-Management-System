@@ -143,16 +143,16 @@ public class mainFormController implements Initializable {
 
 
 
-    /*public boolean searchPart(int id){ //vestigial Implemented in Inventory: To be tested
+    /*public boolean searchPart(int id){ //vestigial Unnecessary?
         for(Part part : Inventory.getAllParts()){
             if(part.getId() == id){
                 return true;
             }
         }
         return false;
-    }*/
+    }
 
-    /*public boolean searchProduct(int id){ //vestigial Implemented in Inventory: To be tested
+    public boolean searchProduct(int id){ //vestigial Unnecessary?
         for(Product product : Inventory.getAllProducts()){
             if(product.getId() == id){
                 return true;
@@ -189,25 +189,25 @@ public class mainFormController implements Initializable {
         return false;
     }
 
-    public boolean deletePart(int id){ //todo to be implemented in Inventory vestigial Testing
+    /*public boolean deletePart(int id){ //vestigial Testing
         for(Part partX : Inventory.getAllParts()){
             if(partX.getId() == id){
                 return Inventory.getAllParts().remove(partX);
             }
         }
         return false;
-    }
+    }*/
 
-    public boolean deleteProduct(int id){ //todo to be implemented in Inventory
+    /*public boolean deleteProduct(int id){ //vestigial Testing
         for(Product productX : Inventory.getAllProducts()){
             if(productX.getId() == id){
                 return Inventory.getAllProducts().remove(productX);
             }
         }
         return false;
-    }
+    }*/
 
-    public Part selectPart(int partId){
+    /*public Part selectPart(int partId){ //vestigial Testing
         for(Part part : Inventory.getAllParts()){
             if(part.getId() == partId)
                 return part;
@@ -215,19 +215,22 @@ public class mainFormController implements Initializable {
         return null;
     }
 
-    public Product selectProduct(int id){
+    public Product selectProduct(int productId){ //vestigial Testing
         for(Product product : Inventory.getAllProducts()){
-            if(product.getId() == id)
+            if(product.getId() == productId)
                 return product;
         }
         return null;
-    }
+    }*/
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        partTableView.setItems(Inventory.getAllParts());
-        productTableView.setItems(Inventory.getAllProducts());
+        //partTableView.setItems(Inventory.getAllParts());
+        //productTableView.setItems(Inventory.getAllProducts());
+
+        partTableView.setItems(Inventory.lookupPart("Placeholder"));
+        productTableView.setItems(Inventory.lookupProduct("Placeholder"));
 
         partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -256,7 +259,7 @@ public class mainFormController implements Initializable {
 
         //partTableView.getSelectionModel().select(Inventory.lookupPart(2));
 
-        Inventory.deletePart(Inventory.lookupPart(5));
+        //Inventory.deletePart(Inventory.lookupPart(5));
 
     }
 }

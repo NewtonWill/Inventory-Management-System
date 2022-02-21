@@ -22,6 +22,13 @@ public class Product {
         this.max = max;
     }
 
+    public static int nextProductId = 1000;
+
+    public static int getNextProductId(){
+        nextProductId++;
+        return nextProductId;
+    }
+
     public int getId() {
         return id;
     }
@@ -75,8 +82,19 @@ public class Product {
     }
 
     public boolean deleteAssociatedPart(Part selectedAssociatedPart) {
-        //fixme
-        return true;
+        //todo testing needed
+
+        if (selectedAssociatedPart == null)
+            return false;
+
+        for(Part partX : getAllAssociatedParts()){
+            if(partX.getId() == selectedAssociatedPart.getId()){
+                System.out.println("Part ID " + selectedAssociatedPart.getId() + " Removed");
+                return getAllAssociatedParts().remove(partX);
+            }
+        }
+        System.out.println("Part ID " + selectedAssociatedPart.getId() + " Not Found");
+        return false;
     }
 
     public ObservableList<Part> getAllAssociatedParts() {

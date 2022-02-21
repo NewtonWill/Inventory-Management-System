@@ -23,14 +23,22 @@ public class Main extends Application {
 
     public static void main(String[] args){
 
-        InHouse inhouse1 = new InHouse(1, "Pedal", 25, 10, 0, 20, 1234);
-        Outsourced outsourced1 = new Outsourced(2, "Chain", 9.99, 2, 0, 4, "ChainCo");
+        InHouse inhouse1 = new InHouse(Part.getNextPartId(), "Pedal", 25, 10, 0, 20, 1234);
+        InHouse inhouse2 = new InHouse(Part.getNextPartId(), "Bike Tire", 25, 10, 0, 20, 1080);
 
-        Product product1 = new Product(10, "Bike", 199.99, 5, 1, 10);
+        Outsourced outsourced1 = new Outsourced(Part.getNextPartId(), "Chain", 9.99, 2, 0, 4, "ChainCo");
+
+        Product product1 = new Product(Product.getNextProductId(), "Bike", 199.99, 10, 1, 20);
+        Product product2 = new Product(Product.getNextProductId(), "Tandem", 299.99, 5, 0, 10);
+        Product product3 = new Product(Product.getNextProductId(), "Skateboard", 99.99, 20, 2, 35);
 
         Inventory.addPart(inhouse1);
+        Inventory.addPart(inhouse2);
         Inventory.addPart(outsourced1);
+
         Inventory.addProduct(product1);
+        Inventory.addProduct(product2);
+        Inventory.addProduct(product3);
 
         launch(args);
     }

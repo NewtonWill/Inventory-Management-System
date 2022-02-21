@@ -16,11 +16,11 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <RadioButton fx:id="inhouseRadio" mnemonicParsing="false" text="In-House">
+                  <RadioButton fx:id="inhouseRadio" mnemonicParsing="false" onAction="#onActionInHouse" text="In-House">
                      <toggleGroup>
                         <ToggleGroup fx:id="sourceTG" />
                      </toggleGroup></RadioButton>
-                  <RadioButton fx:id="outsourceRadio" mnemonicParsing="false" text="Outsourced" toggleGroup="$sourceTG" />
+                  <RadioButton fx:id="outsourceRadio" mnemonicParsing="false" onAction="#onActionOutsourced" text="Outsourced" toggleGroup="$sourceTG" />
                </children>
                <VBox.margin>
                   <Insets />
