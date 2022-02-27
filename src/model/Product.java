@@ -22,13 +22,6 @@ public class Product {
         this.max = max;
     }
 
-    public static int nextProductId = 1000;
-
-    public static int getNextProductId(){
-        nextProductId++;
-        return nextProductId;
-    }
-
     public int getId() {
         return id;
     }

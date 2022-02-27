@@ -12,6 +12,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.InHouse;
+import model.Inventory;
+import model.Outsourced;
+import model.Part;
 
 import java.io.IOException;
 import java.net.URL;
@@ -54,14 +58,66 @@ public class modifyPartController implements Initializable {
     private TextField partInvTxt;
 
     @FXML
-    private RadioButton outsourcedRadio;
+    private RadioButton outsourceRadio;
 
     @FXML
     private Button saveBtn;
 
     @FXML
-    void onActionSavePart(ActionEvent event) {
+    void onActionSavePart(ActionEvent event) throws IOException{
 
+        if (!(modPartDataCheck())){
+            System.out.println("Part data invalid");
+            return;
+        }
+
+        int id =        Integer.parseInt(partIdTxt.getText());
+        String name =   partNameTxt.getText();
+        int inv =       Integer.parseInt(partInvTxt.getText());
+        double price =  Double.parseDouble(partPriceTxt.getText());
+        int max =       Integer.parseInt(partMaxTxt.getText());
+        int min =       Integer.parseInt(partMinTxt.getText());
+        /*runtime Error had occurred when adding new outsourced using non-int in altIDTxt
+        caused by "int machineId = Integer.parseInt(altIdTxt.getText());" placed here.
+        resolved by containing line within specified if statement
+        */
+
+        int currentIndex = Inventory.getAllProducts().indexOf(Inventory.lookupProduct(id));
+        //warning above line doesn't work
+
+        System.out.println(currentIndex);
+
+        if (inhouseRadio.isSelected()) {
+
+            int machineId = Integer.parseInt(altIdTxt.getText());
+
+            Inventory.updatePart(currentIndex, new InHouse(id, name, price, inv, min, max,
+                    machineId));
+            System.out.println("In-House part updated");
+
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+
+        else if (outsourceRadio.isSelected()) {
+            String companyName = altIdTxt.getText();
+
+            Inventory.updatePart(currentIndex, new Outsourced(id, name, price, inv, min, max,
+                    companyName));
+            System.out.println("Outsourced part updated");
+
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+
+
+        else {
+            System.out.println("Error with input, In-House or Outsourced must be specified");
+        }
     }
 
     @FXML
@@ -71,6 +127,23 @@ public class modifyPartController implements Initializable {
         scene = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
+    }
+
+    public void sendPart(Part part) {
+        partIdTxt.setText(String.valueOf(part.getId()));
+        partNameTxt.setText(part.getName());
+        partInvTxt.setText(String.valueOf(part.getStock()));
+        partPriceTxt.setText(String.valueOf(part.getPrice()));
+        partMaxTxt.setText(String.valueOf(part.getMax()));
+        partMinTxt.setText(String.valueOf(part.getMin()));
+        if (part instanceof InHouse) { //used to check if instanceOf inhouse or outsourced to set altIdtxt and set radio buttons
+            altIdTxt.setText(String.valueOf(((InHouse) part).getMachineId()));
+            inhouseRadio.setSelected(true);
+        }
+        else {
+            altIdTxt.setText(((Outsourced) part).getCompanyName());
+            outsourceRadio.setSelected(true);
+        }
     }
 
     @FXML
@@ -87,6 +160,48 @@ public class modifyPartController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+    }
+
+    public boolean modPartDataCheck(){
+
+        if(!(inhouseRadio.isSelected() || outsourceRadio.isSelected())) {
+            System.out.println("No Radio selection made... how did you do this?");
+            return false;
+        }
+        if((partNameTxt.getText().isBlank())){
+            System.out.println("Name space cannot be blank");
+            return false;
+        }
+        if(partInvTxt.getText().isBlank() || !(Inventory.isInteger(partInvTxt.getText()))){
+            System.out.println("Inventory space is invalid");
+            return false;
+        }
+        if(partPriceTxt.getText().isBlank() || !(Inventory.isDouble(partPriceTxt.getText()))){
+            System.out.println("Price space is invalid");
+            return false;
+        }
+        if(partMaxTxt.getText().isBlank() || !(Inventory.isInteger(partMaxTxt.getText()))){
+            System.out.println("Max space is invalid");
+            return false;
+        }
+        if(partMinTxt.getText().isBlank() || !(Inventory.isInteger(partMinTxt.getText()))){
+            System.out.println("Min space is invalid");
+            return false;
+        }
+        if(Integer.parseInt(partMaxTxt.getText()) < Integer.parseInt(partMinTxt.getText())){
+            System.out.println("Minimum value cannot be greater than Maximum Value");
+            return false;
+        }
+        if(altIdTxt.getText().isBlank()){
+            System.out.println("Machine ID/ Company Name space cannot be blank");
+            return false;
+        }
+        if(inhouseRadio.isSelected() && !(Inventory.isInteger(altIdTxt.getText()))){
+            System.out.println("Machine ID must be integer");
+            return false;
+        }
+
+        return true;
     }
 
 }

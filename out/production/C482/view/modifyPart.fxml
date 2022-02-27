@@ -16,11 +16,11 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <RadioButton fx:id="inhouseRadio" mnemonicParsing="false" text="In-House">
+                  <RadioButton fx:id="inhouseRadio" mnemonicParsing="false" onAction="#onActionInHouse" text="In-House">
                      <toggleGroup>
                         <ToggleGroup fx:id="sourceTG" />
                      </toggleGroup></RadioButton>
-                  <RadioButton fx:id="outsourcedRadio" mnemonicParsing="false" text="Outsourced" toggleGroup="$sourceTG" />
+                  <RadioButton fx:id="outsourcedRadio" mnemonicParsing="false" onAction="#onActionOutsourced" text="Outsourced" toggleGroup="$sourceTG" />
                </children>
                <VBox.margin>
                   <Insets />
@@ -51,7 +51,7 @@
                   <Label text="Price/Cost" GridPane.rowIndex="3" />
                   <Label text="Max" GridPane.rowIndex="4" />
                   <Label fx:id="altIdLabel" text="Machine ID" GridPane.rowIndex="5" />
-                  <TextField fx:id="partIdTxt" GridPane.columnIndex="1" />
+                  <TextField fx:id="partIdTxt" disable="true" editable="false" GridPane.columnIndex="1" />
                   <TextField fx:id="partNameTxt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="partInvTxt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />

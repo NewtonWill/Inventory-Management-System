@@ -31,7 +31,7 @@ public class addPartController implements Initializable {
     private TextField partPriceTxt;
 
     @FXML
-    private Label altIdLabel; //fixme figure out how to change label on radio switch
+    private Label altIdLabel;
 
     @FXML
     private TextField partMaxTxt;
@@ -75,17 +75,21 @@ public class addPartController implements Initializable {
         //int id = Integer.parseInt(partIdTxt.getText());
         // - vestigial Save for use in mod part scene
 
-        int id = Part.getNextPartId();
+        int id = Inventory.getNextPartId();
         String name =   partNameTxt.getText();
         int inv =       Integer.parseInt(partInvTxt.getText());
         double price =  Double.parseDouble(partPriceTxt.getText());
         int max =       Integer.parseInt(partMaxTxt.getText());
         int min =       Integer.parseInt(partMinTxt.getText());
-        int machineId = Integer.parseInt(altIdTxt.getText());
-        String companyName = altIdTxt.getText();
+        /*runtime Error had occurred when adding new outsourced using non-int in altIDTxt
+        caused by "int machineId = Integer.parseInt(altIdTxt.getText());" placed here.
+        resolved by containing line within specified if statement
+        */
 
 
         if (inhouseRadio.isSelected()) {
+            int machineId = Integer.parseInt(altIdTxt.getText());
+
             Inventory.addPart(new InHouse(id, name, price, inv, min, max,
                     machineId));
             System.out.println("In-House part added");
@@ -94,26 +98,24 @@ public class addPartController implements Initializable {
             scene = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
             stage.setScene(new Scene(scene));
             stage.show();
-
-            return;
         }
 
-        if (outsourceRadio.isSelected()) {
+        else if (outsourceRadio.isSelected()) {
+            String companyName = altIdTxt.getText();
+
             Inventory.addPart(new Outsourced(id, name, price, inv, min, max,
-                    companyName)); //fixme figure out why this isn't accepting non ints
+                    companyName));
             System.out.println("Outsourced part added");
 
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
             stage.setScene(new Scene(scene));
             stage.show();
-
-            return;
         }
 
 
         else {
-            System.out.println("Error with input");
+            System.out.println("Error with input, In-House or Outsourced must be specified");
         }
     }
 
@@ -154,19 +156,19 @@ public class addPartController implements Initializable {
             System.out.println("Name space cannot be blank");
             return false;
         }
-        if(partInvTxt.getText().isBlank() || !(isInteger(partInvTxt.getText()))){
+        if(partInvTxt.getText().isBlank() || !(Inventory.isInteger(partInvTxt.getText()))){
             System.out.println("Inventory space is invalid");
             return false;
         }
-        if(partPriceTxt.getText().isBlank() || !(isDouble(partPriceTxt.getText()))){
+        if(partPriceTxt.getText().isBlank() || !(Inventory.isDouble(partPriceTxt.getText()))){
             System.out.println("Price space is invalid");
             return false;
         }
-        if(partMaxTxt.getText().isBlank() || !(isInteger(partMaxTxt.getText()))){
+        if(partMaxTxt.getText().isBlank() || !(Inventory.isInteger(partMaxTxt.getText()))){
             System.out.println("Max space is invalid");
             return false;
         }
-        if(partMinTxt.getText().isBlank() || !(isInteger(partMinTxt.getText()))){
+        if(partMinTxt.getText().isBlank() || !(Inventory.isInteger(partMinTxt.getText()))){
             System.out.println("Min space is invalid");
             return false;
         }
@@ -178,39 +180,11 @@ public class addPartController implements Initializable {
             System.out.println("Machine ID/ Company Name space cannot be blank");
             return false;
         }
-        if(inhouseRadio.isSelected() && !(isInteger(altIdTxt.getText()))){
+        if(inhouseRadio.isSelected() && !(Inventory.isInteger(altIdTxt.getText()))){
             System.out.println("Machine ID must be integer");
             return false;
         }
 
         return true;
     }
-
-
-    public static boolean isInteger(String string)
-    {
-        try
-        {
-            Integer.parseInt(string);
-            return true;
-        }
-        catch (NumberFormatException ex)
-        {
-            return false;
-        }
-    }
-
-    private static boolean isDouble(String string)
-    {
-        try
-        {
-            Double.parseDouble(string);
-        }
-        catch (NumberFormatException e)
-        {
-            return false;
-        }
-        return true;
-    }
-
 }

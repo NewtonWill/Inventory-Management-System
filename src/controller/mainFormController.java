@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import main.Main;
 import model.Inventory;
 import model.Outsourced;
 import model.Part;
@@ -20,6 +21,7 @@ import model.Product;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 
 public class mainFormController implements Initializable {
 
@@ -96,8 +98,22 @@ public class mainFormController implements Initializable {
     @FXML
     void onActionModifyPart(ActionEvent event) throws IOException {
 
+        if (partTableView.getSelectionModel().getSelectedItem() == null){
+            System.out.println("Error: No part selected");
+            return; //runtime Added if statement to catch if no part is selected
+        }
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/modifyPart.fxml"));
+        loader.load();
+
+        modifyPartController MPartController = loader.getController();
+        MPartController.sendPart(partTableView.getSelectionModel().getSelectedItem());
+
+
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/modifyPart.fxml"));
+        Parent scene = loader.getRoot(); //added to replace next commented line
+        //scene = FXMLLoader.load(getClass().getResource("/view/modifyPart.fxml")); vestigial old style loader
         stage.setScene(new Scene(scene));
         stage.show();
 
@@ -106,7 +122,7 @@ public class mainFormController implements Initializable {
     @FXML
     void onActionDeletePart(ActionEvent event) {
 
-        System.out.println("Delete Part Request");
+        Inventory.deletePart(partTableView.getSelectionModel().getSelectedItem());
     }
 
     @FXML
@@ -132,7 +148,7 @@ public class mainFormController implements Initializable {
     @FXML
     void onActionDeleteProduct(ActionEvent event) {
 
-        System.out.println("Delete Product Request");
+        Inventory.deleteProduct(productTableView.getSelectionModel().getSelectedItem());
     }
 
     @FXML
@@ -242,24 +258,9 @@ public class mainFormController implements Initializable {
         productInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        /*if(searchPart(2))
-            System.out.println("Search found");
-        else
-            System.out.println("No search found");
-
-        if(updatePart(4, new Outsourced(8, "Hoops", 8.88, 8, 8, 8, "Hoopland")))
-            System.out.println("update success");
-        else
-            System.out.println("update unsuccessful!");
-
-        if(deletePart(10))
-            System.out.println("Delete successful");
-        else
-            System.out.println("Delete unsuccessful");*/
-
-        //partTableView.getSelectionModel().select(Inventory.lookupPart(2));
-
-        //Inventory.deletePart(Inventory.lookupPart(5));
+System.out.println(Inventory.getAllProducts().indexOf(Inventory.lookupProduct(1001)));
+System.out.println(Inventory.getAllProducts().indexOf(Inventory.lookupProduct(1002)));
+        System.out.println(Inventory.getAllProducts().indexOf(Inventory.lookupProduct(1001)));
 
     }
 }

@@ -14,6 +14,28 @@ public class Inventory {
     private static ObservableList<Product> filteredProducts = FXCollections.observableArrayList();
     //warning Not defined in UML
 
+    public static int nextPartId = 5000;
+
+    public static int getNextPartId(){
+        do{
+            nextPartId++;
+        }
+        while (!(lookupPart(nextPartId) == null));
+        return nextPartId;
+        //runtime Implemented system to check if any modified part IDs matches nextPartID
+    }
+
+    public static int nextProductId = 1000;
+
+    public static int getNextProductId(){
+        do{
+            nextProductId++;
+        }
+        while (!(lookupProduct(nextProductId) == null));
+        return nextProductId;
+        //runtime Implemented system to check if any modified product IDs matches nextProductID
+    }
+
 
     public static void addPart (Part newPart){
         allParts.add(newPart);
@@ -27,22 +49,22 @@ public class Inventory {
     public static Part lookupPart (int partId){
         for(Part part : getAllParts()){
             if(part.getId() == partId) {
-                System.out.println("Part Found");
+                System.out.println("Part ID match Found");
                 return part;
             }
         }
-        System.out.println("Part Not Found");
+        //System.out.println("Part Not Found");
         return null;
     }
 
     public static Product lookupProduct (int productId){
         for(Product product : getAllProducts()){
             if(product.getId() == productId) {
-                System.out.println("Product Found");
+                System.out.println("Product ID match Found");
                 return product;
             }
         }
-        System.out.println("Product Not Found");
+        //System.out.println("Product Not Found");
         return null;
     }
 
@@ -79,7 +101,19 @@ public class Inventory {
     }
 
     public static void updatePart (int index, Part selectedPart){
+
+        System.out.println("Test 1 again");
+
+        System.out.println(index);
+        System.out.println(selectedPart.getName());
+
+        getAllParts().set(index, selectedPart);
+
+        System.out.println("Test 2 again");
+
         //todo transfer from mainformcontroller
+        //warning remember to pass index via indexOf(object o)
+        //warning remember to pass selectedPart via New Inhouse/Outsourced(params)
     }
 
     public static void updateProduct (int index, Product newProduct){
@@ -88,8 +122,10 @@ public class Inventory {
 
     public static boolean deletePart (Part selectedPart){
 
-        if (selectedPart == null)
+        if (selectedPart == null) {
+            System.out.println("Selected Part is null. Delete aborted");
             return false; //runtime used these lines to fix error when lookupPart() returned null
+        }
 
         for(Part partX : getAllParts()){
             if(partX.getId() == selectedPart.getId()){
@@ -142,5 +178,31 @@ public class Inventory {
     public static ObservableList<Product> getFilteredProducts() {
         return filteredProducts;
         //warning Not defined in UML
+    }
+
+    public static boolean isInteger(String string)
+    {
+        try
+        {
+            Integer.parseInt(string);
+            return true;
+        }
+        catch (NumberFormatException ex)
+        {
+            return false;
+        }
+    }
+
+    public static boolean isDouble(String string)
+    {
+        try
+        {
+            Double.parseDouble(string);
+        }
+        catch (NumberFormatException e)
+        {
+            return false;
+        }
+        return true;
     }
 }
