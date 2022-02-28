@@ -149,7 +149,7 @@ public class addPartController implements Initializable {
     public boolean addPartDataCheck(){
 
         if(!(inhouseRadio.isSelected() || outsourceRadio.isSelected())) {
-            System.out.println("No Radio selection made... how did you do this?");
+            System.out.println("No Radio selection made");
             return false;
         }
         if((partNameTxt.getText().isBlank())){
@@ -158,6 +158,14 @@ public class addPartController implements Initializable {
         }
         if(partInvTxt.getText().isBlank() || !(Inventory.isInteger(partInvTxt.getText()))){
             System.out.println("Inventory space is invalid");
+            return false;
+        }
+        if(Integer.parseInt(partInvTxt.getText()) > Integer.parseInt(partMaxTxt.getText())){
+            System.out.println("Current inventory cannot be greater than maximum");
+            return false;
+        }
+        if(Integer.parseInt(partInvTxt.getText()) < Integer.parseInt(partMinTxt.getText())){
+            System.out.println("Current inventory cannot be less than minimum");
             return false;
         }
         if(partPriceTxt.getText().isBlank() || !(Inventory.isDouble(partPriceTxt.getText()))){

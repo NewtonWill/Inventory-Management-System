@@ -23,6 +23,7 @@ public class Inventory {
         while (!(lookupPart(nextPartId) == null));
         return nextPartId;
         //runtime Implemented system to check if any modified part IDs matches nextPartID
+        //vestigial do while loop unnecessary
     }
 
     public static int nextProductId = 1000;
@@ -49,7 +50,7 @@ public class Inventory {
     public static Part lookupPart (int partId){
         for(Part part : getAllParts()){
             if(part.getId() == partId) {
-                System.out.println("Part ID match Found");
+                //System.out.println("Part ID match Found");
                 return part;
             }
         }
@@ -60,7 +61,7 @@ public class Inventory {
     public static Product lookupProduct (int productId){
         for(Product product : getAllProducts()){
             if(product.getId() == productId) {
-                System.out.println("Product ID match Found");
+                //System.out.println("Product ID match Found");
                 return product;
             }
         }
@@ -102,22 +103,17 @@ public class Inventory {
 
     public static void updatePart (int index, Part selectedPart){
 
-        System.out.println("Test 1 again");
-
-        System.out.println(index);
-        System.out.println(selectedPart.getName());
-
         getAllParts().set(index, selectedPart);
 
-        System.out.println("Test 2 again");
-
-        //todo transfer from mainformcontroller
         //warning remember to pass index via indexOf(object o)
-        //warning remember to pass selectedPart via New Inhouse/Outsourced(params)
+        // remember to pass selectedPart via New Inhouse/Outsourced(params)
     }
 
     public static void updateProduct (int index, Product newProduct){
-        //todo transfer from mainformcontroller
+
+        getAllProducts().set(index, newProduct);
+
+        //todo implement system to transfer asc parts from old product to new
     }
 
     public static boolean deletePart (Part selectedPart){

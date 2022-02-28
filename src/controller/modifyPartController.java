@@ -77,15 +77,11 @@ public class modifyPartController implements Initializable {
         double price =  Double.parseDouble(partPriceTxt.getText());
         int max =       Integer.parseInt(partMaxTxt.getText());
         int min =       Integer.parseInt(partMinTxt.getText());
-        /*runtime Error had occurred when adding new outsourced using non-int in altIDTxt
-        caused by "int machineId = Integer.parseInt(altIdTxt.getText());" placed here.
-        resolved by containing line within specified if statement
-        */
+        //runtime Error had occurred when adding new outsourced using non-int in altIDTxt
+        // caused by "int machineId = Integer.parseInt(altIdTxt.getText());" placed here.
+        // resolved by containing line within specified if statement
 
-        int currentIndex = Inventory.getAllProducts().indexOf(Inventory.lookupProduct(id));
-        //warning above line doesn't work
-
-        System.out.println(currentIndex);
+        int currentIndex = Inventory.getAllParts().indexOf(Inventory.lookupPart(id));
 
         if (inhouseRadio.isSelected()) {
 
@@ -142,7 +138,7 @@ public class modifyPartController implements Initializable {
         }
         else {
             altIdTxt.setText(((Outsourced) part).getCompanyName());
-            outsourceRadio.setSelected(true);
+            outsourceRadio.setSelected(true); //warning bugged line
         }
     }
 
@@ -165,7 +161,7 @@ public class modifyPartController implements Initializable {
     public boolean modPartDataCheck(){
 
         if(!(inhouseRadio.isSelected() || outsourceRadio.isSelected())) {
-            System.out.println("No Radio selection made... how did you do this?");
+            System.out.println("No Radio selection made");
             return false;
         }
         if((partNameTxt.getText().isBlank())){
@@ -174,6 +170,14 @@ public class modifyPartController implements Initializable {
         }
         if(partInvTxt.getText().isBlank() || !(Inventory.isInteger(partInvTxt.getText()))){
             System.out.println("Inventory space is invalid");
+            return false;
+        }
+        if(Integer.parseInt(partInvTxt.getText()) > Integer.parseInt(partMaxTxt.getText())){
+            System.out.println("Current inventory cannot be greater than maximum");
+            return false;
+        }
+        if(Integer.parseInt(partInvTxt.getText()) < Integer.parseInt(partMinTxt.getText())){
+            System.out.println("Current inventory cannot be less than minimum");
             return false;
         }
         if(partPriceTxt.getText().isBlank() || !(Inventory.isDouble(partPriceTxt.getText()))){

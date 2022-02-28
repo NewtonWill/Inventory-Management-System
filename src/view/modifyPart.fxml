@@ -20,7 +20,7 @@
                      <toggleGroup>
                         <ToggleGroup fx:id="sourceTG" />
                      </toggleGroup></RadioButton>
-                  <RadioButton fx:id="outsourcedRadio" mnemonicParsing="false" onAction="#onActionOutsourced" text="Outsourced" toggleGroup="$sourceTG" />
+                  <RadioButton fx:id="outsourceRadio" mnemonicParsing="false" onAction="#onActionOutsourced" text="Outsourced" toggleGroup="$sourceTG" />
                </children>
                <VBox.margin>
                   <Insets />
