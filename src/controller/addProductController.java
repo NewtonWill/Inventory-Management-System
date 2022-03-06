@@ -16,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Inventory;
 import model.Part;
+import model.Product;
 
 import java.io.IOException;
 import java.net.URL;
@@ -102,8 +103,27 @@ public class addProductController implements Initializable {
     }
 
     @FXML
-    void onActionSaveProduct(ActionEvent event) {
+    void onActionSaveProduct(ActionEvent event) throws IOException {
 
+        if (!(addProductDataCheck())){
+            System.out.println("Product data invalid");
+            return;
+        }
+
+        int id =        Inventory.getNextProductId();
+        String name =   productNameTxt.getText();
+        int inv =       Integer.parseInt(productInvTxt.getText());
+        double price =  Double.parseDouble(productPriceTxt.getText());
+        int max =       Integer.parseInt(productMaxTxt.getText());
+        int min =       Integer.parseInt(productMinTxt.getText());
+
+        Inventory.addProduct(new Product(id, name, price, inv, min, max));
+        System.out.println("Product added");
+
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @FXML
@@ -126,6 +146,43 @@ public class addProductController implements Initializable {
         partInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+    }
+
+    public boolean addProductDataCheck(){
+
+        if((productNameTxt.getText().isBlank())){
+            System.out.println("Name space cannot be blank");
+            return false;
+        }
+        if(productInvTxt.getText().isBlank() || !(Inventory.isInteger(productInvTxt.getText()))){
+            System.out.println("Inventory space is invalid");
+            return false;
+        }
+        if(Integer.parseInt(productInvTxt.getText()) > Integer.parseInt(productMaxTxt.getText())){
+            System.out.println("Current inventory cannot be greater than maximum");
+            return false;
+        }
+        if(Integer.parseInt(productInvTxt.getText()) < Integer.parseInt(productMinTxt.getText())){
+            System.out.println("Current inventory cannot be less than minimum");
+            return false;
+        }
+        if(productPriceTxt.getText().isBlank() || !(Inventory.isDouble(productPriceTxt.getText()))){
+            System.out.println("Price space is invalid");
+            return false;
+        }
+        if(productMaxTxt.getText().isBlank() || !(Inventory.isInteger(productMaxTxt.getText()))){
+            System.out.println("Max space is invalid");
+            return false;
+        }
+        if(productMinTxt.getText().isBlank() || !(Inventory.isInteger(productMinTxt.getText()))){
+            System.out.println("Min space is invalid");
+            return false;
+        }
+        if(Integer.parseInt(productMaxTxt.getText()) < Integer.parseInt(productMinTxt.getText())){
+            System.out.println("Minimum value cannot be greater than Maximum Value");
+            return false;
+        }
+        return true;
     }
 
 }

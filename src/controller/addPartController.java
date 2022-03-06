@@ -75,16 +75,16 @@ public class addPartController implements Initializable {
         //int id = Integer.parseInt(partIdTxt.getText());
         // - vestigial Save for use in mod part scene
 
-        int id = Inventory.getNextPartId();
+        int id =        Inventory.getNextPartId();
         String name =   partNameTxt.getText();
         int inv =       Integer.parseInt(partInvTxt.getText());
         double price =  Double.parseDouble(partPriceTxt.getText());
         int max =       Integer.parseInt(partMaxTxt.getText());
         int min =       Integer.parseInt(partMinTxt.getText());
-        /*runtime Error had occurred when adding new outsourced using non-int in altIDTxt
-        caused by "int machineId = Integer.parseInt(altIdTxt.getText());" placed here.
-        resolved by containing line within specified if statement
-        */
+        //runtime Error had occurred when adding new outsourced using non-int in altIDTxt
+        // caused by "int machineId = Integer.parseInt(altIdTxt.getText());" placed here.
+        // resolved by containing line within specified if statement
+
 
 
         if (inhouseRadio.isSelected()) {

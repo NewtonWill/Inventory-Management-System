@@ -138,7 +138,7 @@ public class modifyPartController implements Initializable {
         }
         else {
             altIdTxt.setText(((Outsourced) part).getCompanyName());
-            outsourceRadio.setSelected(true); //warning bugged line
+            outsourceRadio.setSelected(true);
         }
     }
 
@@ -159,6 +159,12 @@ public class modifyPartController implements Initializable {
     }
 
     public boolean modPartDataCheck(){
+        //runtime Future Enhancement
+        // A good thing to work on in the future is to create a global version of
+        // this function in inventory that would take parameters instead of directly
+        // from the fxml areas
+        // It may also be beneficial to implement try/catch handlers for
+        // certain exceptions
 
         if(!(inhouseRadio.isSelected() || outsourceRadio.isSelected())) {
             System.out.println("No Radio selection made");

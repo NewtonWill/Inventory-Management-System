@@ -112,8 +112,7 @@ public class mainFormController implements Initializable {
 
 
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        Parent scene = loader.getRoot(); //added to replace next commented line
-        //scene = FXMLLoader.load(getClass().getResource("/view/modifyPart.fxml")); vestigial old style loader
+        Parent scene = loader.getRoot();
         stage.setScene(new Scene(scene));
         stage.show();
 
@@ -138,8 +137,21 @@ public class mainFormController implements Initializable {
     @FXML
     void onActionModifyProduct(ActionEvent event) throws IOException {
 
+        if (productTableView.getSelectionModel().getSelectedItem() == null){
+            System.out.println("Error: No part selected");
+            return; //runtime Added if statement to catch if no product is selected
+        }
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/modifyProduct.fxml"));
+        loader.load();
+
+        modifyProductController MProductController = loader.getController();
+        MProductController.sendProduct(productTableView.getSelectionModel().getSelectedItem());
+
+
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/modifyProduct.fxml"));
+        Parent scene = loader.getRoot();
         stage.setScene(new Scene(scene));
         stage.show();
 
