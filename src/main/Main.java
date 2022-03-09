@@ -28,9 +28,9 @@ public class Main extends Application {
 
         Outsourced outsourced1 = new Outsourced(Inventory.getNextPartId(), "Chain", 9.99, 2, 0, 4, "ChainCo");
 
-        Product product1 = new Product(Inventory.getNextProductId(), "Bike", 199.99, 10, 1, 20);
-        Product product2 = new Product(Inventory.getNextProductId(), "Tandem", 299.99, 5, 0, 10);
-        Product product3 = new Product(Inventory.getNextProductId(), "Skateboard", 99.99, 20, 2, 35);
+        Product product1 = new Product(Inventory.getNextProductId(), "Bike", 199.99, 10, 1, 20, null);
+        Product product2 = new Product(Inventory.getNextProductId(), "Tandem", 299.99, 5, 0, 10, null);
+        Product product3 = new Product(Inventory.getNextProductId(), "Skateboard", 99.99, 20, 2, 35,null);
 
         Inventory.addPart(inhouse1);
         Inventory.addPart(inhouse2);

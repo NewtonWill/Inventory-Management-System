@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -27,6 +29,7 @@ public class modifyProductController implements Initializable {
 
     Stage stage;
     Parent scene;
+    ObservableList<Part> tempAscParts = FXCollections.observableArrayList();
 
     @FXML
     private TableColumn<Part, Double> partPriceCol;
@@ -91,10 +94,18 @@ public class modifyProductController implements Initializable {
     @FXML
     void onActionAddAscPart(ActionEvent event) {
 
+        if (partTableView.getSelectionModel().getSelectedItem() == null){
+            System.out.println("Error: No part selected");
+            return; //runtime Added if statement to catch if no product is selected
+        }
+
+        tempAscParts.add(partTableView.getSelectionModel().getSelectedItem());
     }
 
     @FXML
     void onActionRemoveAscPart(ActionEvent event) {
+
+        tempAscParts.remove(ascTableView.getSelectionModel().getSelectedItem());
 
     }
 
@@ -115,7 +126,8 @@ public class modifyProductController implements Initializable {
 
         int currentIndex = Inventory.getAllProducts().indexOf(Inventory.lookupProduct(id));
 
-        Inventory.updateProduct(currentIndex, new Product(id, name, price, inv, min, max));
+        Inventory.updateProduct(currentIndex, new Product(id, name, price, inv, min, max,
+                tempAscParts));
         System.out.println("Product updated");
 
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -140,6 +152,9 @@ public class modifyProductController implements Initializable {
         productPriceTxt.setText(String.valueOf(product.getPrice()));
         productMaxTxt.setText(String.valueOf(product.getMax()));
         productMinTxt.setText(String.valueOf(product.getMin()));
+        if(!(product.getAllAssociatedParts().isEmpty())) {
+            tempAscParts.setAll(product.getAllAssociatedParts());
+        } //warning
     }
 
     @Override
@@ -151,6 +166,13 @@ public class modifyProductController implements Initializable {
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         partInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        ascTableView.setItems(tempAscParts);
+
+        ascIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        ascNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ascInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        ascPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
     }
 

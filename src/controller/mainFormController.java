@@ -138,7 +138,7 @@ public class mainFormController implements Initializable {
     void onActionModifyProduct(ActionEvent event) throws IOException {
 
         if (productTableView.getSelectionModel().getSelectedItem() == null){
-            System.out.println("Error: No part selected");
+            System.out.println("Error: No product selected");
             return; //runtime Added if statement to catch if no product is selected
         }
 

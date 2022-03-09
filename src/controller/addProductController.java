@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -27,6 +29,7 @@ public class addProductController implements Initializable {
 
     Stage stage;
     Parent scene;
+    ObservableList<Part> tempAscParts = FXCollections.observableArrayList();
 
     @FXML
     private TableColumn<Part, Double> partPriceCol;
@@ -116,8 +119,9 @@ public class addProductController implements Initializable {
         double price =  Double.parseDouble(productPriceTxt.getText());
         int max =       Integer.parseInt(productMaxTxt.getText());
         int min =       Integer.parseInt(productMinTxt.getText());
+        //todo associated parts
 
-        Inventory.addProduct(new Product(id, name, price, inv, min, max));
+        Inventory.addProduct(new Product(id, name, price, inv, min, max, tempAscParts));
         System.out.println("Product added");
 
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -145,6 +149,13 @@ public class addProductController implements Initializable {
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         partInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        ascPartView.setItems(tempAscParts);
+
+        ascIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        ascNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ascInventoryCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        ascPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
     }
 

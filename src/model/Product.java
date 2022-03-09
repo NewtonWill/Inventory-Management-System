@@ -13,13 +13,15 @@ public class Product {
     private int min;
     private int max;
 
-    public Product(int id, String name, double price, int stock, int min, int max) {
+    public Product(int id, String name, double price, int stock, int min, int max,
+                   ObservableList<Part> ascParts) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.stock = stock;
         this.min = min;
         this.max = max;
+        this.associatedParts = ascParts;
     }
 
     public int getId() {
@@ -71,7 +73,7 @@ public class Product {
     }
 
     public void addAssociatedPart(Part part) {
-        associatedParts.add(part);
+        this.associatedParts.add(part);
     }
 
     public boolean deleteAssociatedPart(Part selectedAssociatedPart) {
