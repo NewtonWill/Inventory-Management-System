@@ -98,10 +98,19 @@ public class addProductController implements Initializable {
     @FXML
     void onActionAddAscPart(ActionEvent event) {
 
+        if (partTableView.getSelectionModel().getSelectedItem() == null){
+            System.out.println("Error: No part selected");
+            return; //runtime Added if statement to catch if no product is selected
+        }
+
+        tempAscParts.add(partTableView.getSelectionModel().getSelectedItem());
+
     }
 
     @FXML
     void onActionRemoveAscPart(ActionEvent event) {
+
+        tempAscParts.remove(ascPartView.getSelectionModel().getSelectedItem());
 
     }
 

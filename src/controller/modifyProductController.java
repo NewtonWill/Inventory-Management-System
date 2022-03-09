@@ -152,9 +152,10 @@ public class modifyProductController implements Initializable {
         productPriceTxt.setText(String.valueOf(product.getPrice()));
         productMaxTxt.setText(String.valueOf(product.getMax()));
         productMinTxt.setText(String.valueOf(product.getMin()));
-        if(!(product.getAllAssociatedParts().isEmpty())) {
-            tempAscParts.setAll(product.getAllAssociatedParts());
-        } //warning
+
+        if (!(product.getAllAssociatedParts() == null))
+            tempAscParts = FXCollections.observableArrayList(product.getAllAssociatedParts());
+        ascTableView.setItems(tempAscParts);
     }
 
     @Override
