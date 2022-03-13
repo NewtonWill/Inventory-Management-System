@@ -103,11 +103,14 @@ public class Inventory {
             getFilteredProducts().clear();
 
         for(Product productx : getAllProducts()){
-            if(productx.getName().contains(productName))
+
+            if(productx.getName().contains(productName)){
                 getFilteredProducts().add(productx);
+                System.out.println(productx.getName() + " added");
+            }
         }
 
-        if(getFilteredParts().isEmpty())
+        if(getFilteredProducts().isEmpty())
             return getAllProducts();
         else
             return getFilteredProducts();
@@ -116,16 +119,11 @@ public class Inventory {
     public static void updatePart (int index, Part selectedPart){
 
         getAllParts().set(index, selectedPart);
-
-        //warning remember to pass index via indexOf(object o)
-        // remember to pass selectedPart via New Inhouse/Outsourced(params)
     }
 
     public static void updateProduct (int index, Product newProduct){
 
         getAllProducts().set(index, newProduct);
-
-        //todo implement system to transfer asc parts from old product to new
     }
 
     public static boolean deletePart (Part selectedPart){

@@ -158,6 +158,12 @@ public class modifyProductController implements Initializable {
         ascTableView.setItems(tempAscParts);
     }
 
+    @FXML
+    void onActionPartSearch(ActionEvent event) {
+
+        partTableView.setItems(Inventory.lookupPart(searchTxt.getText()));
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 

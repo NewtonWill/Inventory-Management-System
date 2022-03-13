@@ -175,10 +175,15 @@ public class mainFormController implements Initializable {
     }
 
     @FXML
-    void onActionPartSearch(ActionEvent event) { //todo make this work without pressing enter
-
+    void onActionPartSearch(ActionEvent event) {
 
         partTableView.setItems(Inventory.lookupPart(partSearchTxt.getText()));
+    }
+
+    @FXML
+    void onActionProductSearch(ActionEvent event) {
+
+        productTableView.setItems(Inventory.lookupProduct(productSearchTxt.getText()));
     }
 
     @Override

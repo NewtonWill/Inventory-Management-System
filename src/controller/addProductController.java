@@ -148,6 +148,12 @@ public class addProductController implements Initializable {
         stage.show();
     }
 
+    @FXML
+    void onActionPartSearch(ActionEvent event) {
+
+        partTableView.setItems(Inventory.lookupPart(searchTxt.getText()));
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
