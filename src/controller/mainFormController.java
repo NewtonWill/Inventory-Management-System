@@ -167,14 +167,20 @@ public class mainFormController implements Initializable {
         System.exit(0);
     }
 
+    @FXML
+    void onActionPartSearch(ActionEvent event) {
+        partTableView.setItems(Inventory.lookupPart(partSearchTxt.getText()));
+        //partTableView.setItems(Inventory.getAllParts());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        //partTableView.setItems(Inventory.getAllParts());
-        //productTableView.setItems(Inventory.getAllProducts());
+        partTableView.setItems(Inventory.getAllParts());
+        productTableView.setItems(Inventory.getAllProducts());
 
-        partTableView.setItems(Inventory.lookupPart("Placeholder"));
-        productTableView.setItems(Inventory.lookupProduct("Placeholder"));
+        //partTableView.setItems(Inventory.lookupPart("Ped"));
+        //productTableView.setItems(Inventory.lookupProduct(""));
 
         partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));

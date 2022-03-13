@@ -77,6 +77,14 @@ public class Inventory {
         for(Part partx : getAllParts()){
             if(partx.getName().contains(partName))
                 getFilteredParts().add(partx);
+
+            try {
+                if (partx.getId() == (Integer.parseInt(partName)))
+                    getFilteredParts().add(partx);
+            }
+            catch (NumberFormatException e) {
+                //e.printStackTrace();
+            }
         }
 
         if(getFilteredParts().isEmpty())
