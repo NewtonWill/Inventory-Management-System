@@ -75,12 +75,16 @@ public class Inventory {
             getFilteredParts().clear();
 
         for(Part partx : getAllParts()){
-            if(partx.getName().contains(partName))
+            if(partx.getName().contains(partName)) {
                 getFilteredParts().add(partx);
+                System.out.println(partx.getName() + " added via name");
+            }
 
             try {
-                if (partx.getId() == (Integer.parseInt(partName)))
+                if (partx.getId() == (Integer.parseInt(partName))) {
                     getFilteredParts().add(partx);
+                    System.out.println(partx.getName() + " added via ID");
+                }
             }
             catch (NumberFormatException e) {
                 //e.printStackTrace();
@@ -148,9 +152,9 @@ public class Inventory {
             return false;
         }
 
-        if (!(selectedProduct.getAllAssociatedParts().isEmpty())) {
+        if (!((selectedProduct.getAllAssociatedParts() == null) || selectedProduct.getAllAssociatedParts().isEmpty())) {
             System.out.println("Associated part(s) found. Delete aborted");
-            return false; //todo testing needed
+            return false;
         }
 
         for(Product productX : Inventory.getAllProducts()){
@@ -191,7 +195,7 @@ public class Inventory {
             Integer.parseInt(string);
             return true;
         }
-        catch (NumberFormatException ex)
+        catch (NumberFormatException e)
         {
             return false;
         }

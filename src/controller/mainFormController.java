@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import main.Main;
@@ -121,7 +118,12 @@ public class mainFormController implements Initializable {
     @FXML
     void onActionDeletePart(ActionEvent event) {
 
-        Inventory.deletePart(partTableView.getSelectionModel().getSelectedItem());
+        if(!(Inventory.deletePart(partTableView.getSelectionModel().getSelectedItem()))){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Part Not Deleted");
+            alert.setContentText("No part selected to delete");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -159,7 +161,12 @@ public class mainFormController implements Initializable {
 
     @FXML
     void onActionDeleteProduct(ActionEvent event) {
-        Inventory.deleteProduct(productTableView.getSelectionModel().getSelectedItem());
+        if(!(Inventory.deleteProduct(productTableView.getSelectionModel().getSelectedItem()))){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Product Not Deleted");
+            alert.setContentText("Product has associated parts or no product selected to delete ");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -168,18 +175,21 @@ public class mainFormController implements Initializable {
     }
 
     @FXML
-    void onActionPartSearch(ActionEvent event) {
+    void onActionPartSearch(ActionEvent event) { //todo make this work without pressing enter
+
+
         partTableView.setItems(Inventory.lookupPart(partSearchTxt.getText()));
-        //partTableView.setItems(Inventory.getAllParts());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
+
         partTableView.setItems(Inventory.getAllParts());
         productTableView.setItems(Inventory.getAllProducts());
 
-        //partTableView.setItems(Inventory.lookupPart("Ped"));
+        //partTableView.setItems(Inventory.lookupPart(""));
         //productTableView.setItems(Inventory.lookupProduct(""));
 
         partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
