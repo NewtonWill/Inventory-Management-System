@@ -17,6 +17,7 @@ import model.Product;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -118,11 +119,21 @@ public class mainFormController implements Initializable {
     @FXML
     void onActionDeletePart(ActionEvent event) {
 
-        if(!(Inventory.deletePart(partTableView.getSelectionModel().getSelectedItem()))){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Part Not Deleted");
-            alert.setContentText("No part selected to delete");
-            alert.showAndWait();
+        if(partTableView.getSelectionModel().getSelectedItem() == null){
+            Alert noPartAlert = new Alert(Alert.AlertType.ERROR);
+            noPartAlert.setTitle("Part Not Deleted");
+            noPartAlert.setContentText("No part selected to delete");
+            noPartAlert.showAndWait();
+            return;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Part?");
+        alert.setContentText("Press okay to confirm deletion of part");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.get() == ButtonType.OK){
+            Inventory.deletePart(partTableView.getSelectionModel().getSelectedItem());
         }
     }
 
@@ -161,11 +172,27 @@ public class mainFormController implements Initializable {
 
     @FXML
     void onActionDeleteProduct(ActionEvent event) {
-        if(!(Inventory.deleteProduct(productTableView.getSelectionModel().getSelectedItem()))){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Product Not Deleted");
-            alert.setContentText("Product has associated parts or no product selected to delete ");
-            alert.showAndWait();
+
+        if(productTableView.getSelectionModel().getSelectedItem() == null){
+            Alert noProdAlert = new Alert(Alert.AlertType.ERROR);
+            noProdAlert.setTitle("Error");
+            noProdAlert.setContentText("No product selected");
+            noProdAlert.showAndWait();
+            return;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Product?");
+        alert.setContentText("Press okay to confirm deletion of product");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.get() == ButtonType.OK){
+            if(!(Inventory.deleteProduct(productTableView.getSelectionModel().getSelectedItem()))){
+                Alert ascAlert = new Alert(Alert.AlertType.ERROR);
+                ascAlert.setTitle("Product Not Deleted");
+                ascAlert.setContentText("Product has associated parts");
+                ascAlert.showAndWait();
+            }
         }
     }
 

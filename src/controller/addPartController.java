@@ -7,10 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.InHouse;
 import model.Inventory;
@@ -148,51 +145,59 @@ public class addPartController implements Initializable {
 
     public boolean addPartDataCheck(){
 
-        if(!(inhouseRadio.isSelected() || outsourceRadio.isSelected())) {
-            System.out.println("No Radio selection made");
-            return false;
-        }
-        if((partNameTxt.getText().isBlank())){
-            System.out.println("Name space cannot be blank");
-            return false;
-        }
-        if(partInvTxt.getText().isBlank() || !(Inventory.isInteger(partInvTxt.getText()))){
-            System.out.println("Inventory space is invalid");
-            return false;
-        }
-        if(Integer.parseInt(partInvTxt.getText()) > Integer.parseInt(partMaxTxt.getText())){
-            System.out.println("Current inventory cannot be greater than maximum");
-            return false;
-        }
-        if(Integer.parseInt(partInvTxt.getText()) < Integer.parseInt(partMinTxt.getText())){
-            System.out.println("Current inventory cannot be less than minimum");
-            return false;
-        }
-        if(partPriceTxt.getText().isBlank() || !(Inventory.isDouble(partPriceTxt.getText()))){
-            System.out.println("Price space is invalid");
-            return false;
-        }
-        if(partMaxTxt.getText().isBlank() || !(Inventory.isInteger(partMaxTxt.getText()))){
-            System.out.println("Max space is invalid");
-            return false;
-        }
-        if(partMinTxt.getText().isBlank() || !(Inventory.isInteger(partMinTxt.getText()))){
-            System.out.println("Min space is invalid");
-            return false;
-        }
-        if(Integer.parseInt(partMaxTxt.getText()) < Integer.parseInt(partMinTxt.getText())){
-            System.out.println("Minimum value cannot be greater than Maximum Value");
-            return false;
-        }
-        if(altIdTxt.getText().isBlank()){
-            System.out.println("Machine ID/ Company Name space cannot be blank");
-            return false;
-        }
-        if(inhouseRadio.isSelected() && !(Inventory.isInteger(altIdTxt.getText()))){
-            System.out.println("Machine ID must be integer");
-            return false;
-        }
+        Alert checkAlert = new Alert(Alert.AlertType.ERROR);
+        checkAlert.setTitle("Product Not Deleted");
 
+        if (!(inhouseRadio.isSelected() || outsourceRadio.isSelected())) {
+            checkAlert.setContentText("No Radio selection made");
+            checkAlert.show();
+            return false;
+        }
+        if ((partNameTxt.getText().isBlank())) {
+            checkAlert.setContentText("Name space cannot be blank");
+            checkAlert.show();
+            return false;
+        }
+        if (!(Inventory.isInteger(partInvTxt.getText())) || partInvTxt.getText().isBlank()) {
+            checkAlert.setContentText("Inventory space is invalid");
+            checkAlert.show();
+            return false;
+        }
+        if (partPriceTxt.getText().isBlank() || !(Inventory.isDouble(partPriceTxt.getText()))) {
+            checkAlert.setContentText("Price space is invalid");
+            checkAlert.show();
+            return false;
+        }
+        if (partMaxTxt.getText().isBlank() || !(Inventory.isInteger(partMaxTxt.getText()))) {
+            checkAlert.setContentText("Max space is invalid");
+            checkAlert.show();
+            return false;
+        }
+        if (partMinTxt.getText().isBlank() || !(Inventory.isInteger(partMinTxt.getText()))) {
+            checkAlert.setContentText("Min space is invalid");
+            checkAlert.show();
+            return false;
+        }
+        if (Integer.parseInt(partMaxTxt.getText()) < Integer.parseInt(partMinTxt.getText())) {
+            checkAlert.setContentText("Minimum value cannot be greater than Maximum Value");
+            checkAlert.show();
+            return false;
+        }
+        if (Integer.parseInt(partInvTxt.getText()) > Integer.parseInt(partMaxTxt.getText())) {
+            checkAlert.setContentText("Current inventory cannot be greater than maximum");
+            checkAlert.show();
+            return false;
+        }
+        if (Integer.parseInt(partInvTxt.getText()) < Integer.parseInt(partMinTxt.getText())) {
+            checkAlert.setContentText("Current inventory cannot be less than minimum");
+            checkAlert.show();
+            return false;
+        }
+        if (inhouseRadio.isSelected() && !(Inventory.isInteger(altIdTxt.getText()))) {
+            checkAlert.setContentText("Machine ID must be integer");
+            checkAlert.show();
+            return false;
+        }
         return true;
     }
 }

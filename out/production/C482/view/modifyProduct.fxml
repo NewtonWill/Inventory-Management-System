@@ -86,7 +86,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0">
                      <children>
-                        <TextField fx:id="searchTxt" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="Search by Part ID or Name" />
+                        <TextField fx:id="searchTxt" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionPartSearch" prefWidth="200.0" promptText="Search by Part ID or Name" />
                      </children>
                   </HBox>
                   <TableView fx:id="partTableView" prefHeight="200.0" prefWidth="200.0">

@@ -8,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -22,6 +19,7 @@ import model.Product;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -110,8 +108,22 @@ public class addProductController implements Initializable {
     @FXML
     void onActionRemoveAscPart(ActionEvent event) {
 
-        tempAscParts.remove(ascPartView.getSelectionModel().getSelectedItem());
+        if(ascPartView.getSelectionModel().getSelectedItem() == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("No part selected to remove");
+            alert.show();
+            return;
+        }
 
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Remove associated part?");
+        alert.setContentText("Press okay to confirm removal of part");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.get() == ButtonType.OK) {
+            tempAscParts.remove(ascPartView.getSelectionModel().getSelectedItem());
+        }
     }
 
     @FXML
@@ -176,36 +188,47 @@ public class addProductController implements Initializable {
 
     public boolean addProductDataCheck(){
 
+        Alert checkAlert = new Alert(Alert.AlertType.ERROR);
+        checkAlert.setTitle("Product Not Deleted");
+
         if((productNameTxt.getText().isBlank())){
-            System.out.println("Name space cannot be blank");
+            checkAlert.setContentText("Name space cannot be blank");
+            checkAlert.show();
             return false;
         }
-        if(productInvTxt.getText().isBlank() || !(Inventory.isInteger(productInvTxt.getText()))){
-            System.out.println("Inventory space is invalid");
-            return false;
-        }
-        if(Integer.parseInt(productInvTxt.getText()) > Integer.parseInt(productMaxTxt.getText())){
-            System.out.println("Current inventory cannot be greater than maximum");
-            return false;
-        }
-        if(Integer.parseInt(productInvTxt.getText()) < Integer.parseInt(productMinTxt.getText())){
-            System.out.println("Current inventory cannot be less than minimum");
+        if(!(Inventory.isInteger(productInvTxt.getText())) || productInvTxt.getText().isBlank()){
+            checkAlert.setContentText("Inventory space is invalid");
+            checkAlert.show();
             return false;
         }
         if(productPriceTxt.getText().isBlank() || !(Inventory.isDouble(productPriceTxt.getText()))){
-            System.out.println("Price space is invalid");
+            checkAlert.setContentText("Price space is invalid");
+            checkAlert.show();
             return false;
         }
         if(productMaxTxt.getText().isBlank() || !(Inventory.isInteger(productMaxTxt.getText()))){
-            System.out.println("Max space is invalid");
+            checkAlert.setContentText("Max space is invalid");
+            checkAlert.show();
             return false;
         }
         if(productMinTxt.getText().isBlank() || !(Inventory.isInteger(productMinTxt.getText()))){
-            System.out.println("Min space is invalid");
+            checkAlert.setContentText("Min space is invalid");
+            checkAlert.show();
             return false;
         }
         if(Integer.parseInt(productMaxTxt.getText()) < Integer.parseInt(productMinTxt.getText())){
-            System.out.println("Minimum value cannot be greater than Maximum Value");
+            checkAlert.setContentText("Minimum value cannot be greater than Maximum Value");
+            checkAlert.show();
+            return false;
+        }
+        if(Integer.parseInt(productInvTxt.getText()) > Integer.parseInt(productMaxTxt.getText())){
+            checkAlert.setContentText("Current inventory cannot be greater than maximum");
+            checkAlert.show();
+            return false;
+        }
+        if(Integer.parseInt(productInvTxt.getText()) < Integer.parseInt(productMinTxt.getText())){
+            checkAlert.setContentText("Current inventory cannot be less than minimum");
+            checkAlert.show();
             return false;
         }
         return true;

@@ -2,6 +2,7 @@ package model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
 public class Inventory {
 
@@ -91,8 +92,13 @@ public class Inventory {
             }
         }
 
-        if(getFilteredParts().isEmpty())
+        if(getFilteredParts().isEmpty()) {
+            Alert noMatchAlert = new Alert(Alert.AlertType.WARNING);
+            noMatchAlert.setTitle("Part Search Error");
+            noMatchAlert.setContentText("No matching part(s) found");
+            noMatchAlert.show();
             return getAllParts();
+        }
         else
             return getFilteredParts();
     }
@@ -110,8 +116,13 @@ public class Inventory {
             }
         }
 
-        if(getFilteredProducts().isEmpty())
+        if(getFilteredProducts().isEmpty()) {
+            Alert noMatchAlert = new Alert(Alert.AlertType.WARNING);
+            noMatchAlert.setTitle("Product Search Error");
+            noMatchAlert.setContentText("No matching product(s) found");
+            noMatchAlert.show();
             return getAllProducts();
+        }
         else
             return getFilteredProducts();
     }
