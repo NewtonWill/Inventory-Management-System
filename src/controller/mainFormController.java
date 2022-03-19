@@ -9,9 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import main.Main;
 import model.Inventory;
-import model.Outsourced;
 import model.Part;
 import model.Product;
 
@@ -20,7 +18,10 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-
+/**
+ * The Main Form Controller
+ * @author William Newton
+ */
 public class mainFormController implements Initializable {
 
     Stage stage;
@@ -30,22 +31,10 @@ public class mainFormController implements Initializable {
     private TableColumn<Part, Double> partPriceCol;
 
     @FXML
-    private Button addProductBtn;
-
-    @FXML
     private TableColumn<Product, Integer> productInventoryCol;
 
     @FXML
-    private Button modifyPartBtn;
-
-    @FXML
     private TextField partSearchTxt;
-
-    @FXML
-    private Button exitBtn;
-
-    @FXML
-    private Button modifyProductBtn;
 
     @FXML
     private TableView<Part> partTableView;
@@ -57,9 +46,6 @@ public class mainFormController implements Initializable {
     private TableColumn<Product, Integer> productIdCol;
 
     @FXML
-    private Button deleteProductBtn;
-
-    @FXML
     private TextField productSearchTxt;
 
     @FXML
@@ -67,12 +53,6 @@ public class mainFormController implements Initializable {
 
     @FXML
     private TableView<Product> productTableView;
-
-    @FXML
-    private Button addPartBtn;
-
-    @FXML
-    private Button deletePartBtn;
 
     @FXML
     private TableColumn<Part, Integer> partIdCol;
@@ -83,7 +63,9 @@ public class mainFormController implements Initializable {
     @FXML
     private TableColumn<Product, Double> productPriceCol;
 
-
+    /**
+     * Method brings user to the add part form
+     */
     @FXML
     void onActionAddPart(ActionEvent event) throws IOException {
 
@@ -93,6 +75,9 @@ public class mainFormController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Method verifies selection, and sends the selected part and user to the modify part form
+     */
     @FXML
     void onActionModifyPart(ActionEvent event) throws IOException {
 
@@ -116,6 +101,9 @@ public class mainFormController implements Initializable {
 
     }
 
+    /**
+     * Method verifies selection, confirms with the user, then removes the part from inventory
+     */
     @FXML
     void onActionDeletePart(ActionEvent event) {
 
@@ -137,6 +125,9 @@ public class mainFormController implements Initializable {
         }
     }
 
+    /**
+     * Method brings user to the add product form
+     */
     @FXML
     void onActionAddProduct(ActionEvent event) throws IOException {
 
@@ -147,6 +138,9 @@ public class mainFormController implements Initializable {
 
     }
 
+    /**
+     * Method verifies selection, and sends the selected product and user to the modify product form
+     */
     @FXML
     void onActionModifyProduct(ActionEvent event) throws IOException {
 
@@ -170,6 +164,9 @@ public class mainFormController implements Initializable {
 
     }
 
+    /**
+     * Method verifies selection, confirms with the user, then removes the product from inventory
+     */
     @FXML
     void onActionDeleteProduct(ActionEvent event) {
 
@@ -196,23 +193,35 @@ public class mainFormController implements Initializable {
         }
     }
 
+    /**
+     * Method terminates the program
+     */
     @FXML
     void onActionExitProgram(ActionEvent event) {
         System.exit(0);
     }
 
+    /**
+     * Method sets part table to the search result
+     */
     @FXML
     void onActionPartSearch(ActionEvent event) {
 
         partTableView.setItems(Inventory.lookupPart(partSearchTxt.getText()));
     }
 
+    /**
+     * Method sets product table to the search result
+     */
     @FXML
     void onActionProductSearch(ActionEvent event) {
 
         productTableView.setItems(Inventory.lookupProduct(productSearchTxt.getText()));
     }
 
+    /**
+     * Initialization method sets the part and product table views
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -220,9 +229,6 @@ public class mainFormController implements Initializable {
 
         partTableView.setItems(Inventory.getAllParts());
         productTableView.setItems(Inventory.getAllProducts());
-
-        //partTableView.setItems(Inventory.lookupPart(""));
-        //productTableView.setItems(Inventory.lookupProduct(""));
 
         partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));

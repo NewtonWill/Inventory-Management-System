@@ -12,13 +12,16 @@ import javafx.stage.Stage;
 import model.InHouse;
 import model.Inventory;
 import model.Outsourced;
-import model.Part;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
+/**
+ * The Add Part Controller
+ * @author William Newton
+ */
 public class addPartController implements Initializable {
 
     Stage stage;
@@ -40,13 +43,7 @@ public class addPartController implements Initializable {
     private TextField altIdTxt;
 
     @FXML
-    private Button cancelBtn;
-
-    @FXML
     private TextField partMinTxt;
-
-    @FXML
-    private TextField partIdTxt;
 
     @FXML
     private RadioButton outsourceRadio;
@@ -57,9 +54,9 @@ public class addPartController implements Initializable {
     @FXML
     private TextField partInvTxt;
 
-    @FXML
-    private Button saveBtn;
-
+    /**
+     * Calls the data check method, adds a new part according to the validated inputs, and returns to main form
+     */
     @FXML
     void onActionSavePart(ActionEvent event) throws IOException {
 
@@ -67,10 +64,6 @@ public class addPartController implements Initializable {
             System.out.println("Part data invalid");
             return;
         }
-
-
-        //int id = Integer.parseInt(partIdTxt.getText());
-        // - vestigial Save for use in mod part scene
 
         int id =        Inventory.getNextPartId();
         String name =   partNameTxt.getText();
@@ -110,12 +103,14 @@ public class addPartController implements Initializable {
             stage.show();
         }
 
-
         else {
             System.out.println("Error with input, In-House or Outsourced must be specified");
         }
     }
 
+    /**
+     * Returns to Main form without saving
+     */
     @FXML
     void onActionGotoMainForm(ActionEvent event) throws IOException {
 
@@ -123,19 +118,27 @@ public class addPartController implements Initializable {
         scene = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
-
     }
 
+    /**
+     * Method sets label text appropriately according to the radio button
+     */
     @FXML
     void onActionInHouse() {
         altIdLabel.setText("Machine ID");
     }
 
+    /**
+     * Method sets label text appropriately according to the radio button
+     */
     @FXML
     void onActionOutsourced() {
         altIdLabel.setText("Company Name");
     }
 
+    /**
+     * Initialization method sets inhouseRadio to true
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -143,6 +146,10 @@ public class addPartController implements Initializable {
 
     }
 
+    /**
+     * Method to validate if input fields conform to standards
+     * @return true if all fields conform to standards
+     */
     public boolean addPartDataCheck(){
 
         Alert checkAlert = new Alert(Alert.AlertType.ERROR);

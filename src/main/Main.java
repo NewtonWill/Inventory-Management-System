@@ -8,9 +8,12 @@ import javafx.stage.Stage;
 import model.InHouse;
 import model.Outsourced;
 import model.Inventory;
-import model.Part;
 import model.Product;
 
+/**
+ * The main class of the program
+ * @author William Newton
+ */
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
@@ -21,6 +24,10 @@ public class Main extends Application {
     }
 
 
+    /**
+     * The main executable for the program. Houses test data and launches args
+     * @param args the args to launch
+     */
     public static void main(String[] args){
 
         InHouse inhouse1 = new InHouse(Inventory.getNextPartId(), "Pedal", 25, 10, 0, 20, 1234);

@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * Inherited subclass of Part
+ * @author William Newton
+ */
+
 public class InHouse extends Part {
 
     private int machineId;
@@ -10,11 +15,16 @@ public class InHouse extends Part {
         this.machineId = machineId;
     }
 
-
+    /**
+     * @return the machineId
+     */
     public int getMachineId() {
         return machineId;
     }
 
+    /**
+     * @param machineId the machineID to set
+     */
     public void setMachineId(int machineId) {
         this.machineId = machineId;
     }

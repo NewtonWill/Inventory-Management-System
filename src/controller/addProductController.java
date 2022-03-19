@@ -22,7 +22,10 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-
+/**
+ * The Add Product Controller
+ * @author William Newton
+ */
 public class addProductController implements Initializable {
 
     Stage stage;
@@ -33,16 +36,10 @@ public class addProductController implements Initializable {
     private TableColumn<Part, Double> partPriceCol;
 
     @FXML
-    private Button addProductBtn;
-
-    @FXML
     private TextField productInvTxt;
 
     @FXML
     private TableColumn<Part, String> ascNameCol;
-
-    @FXML
-    private Button cancelBtn;
 
     @FXML
     private TableColumn<Part, Integer> ascInventoryCol;
@@ -66,9 +63,6 @@ public class addProductController implements Initializable {
     private TableColumn<Part, Integer> ascIdCol;
 
     @FXML
-    private Button removeAscBtn;
-
-    @FXML
     private TextField productMinTxt;
 
     @FXML
@@ -78,13 +72,7 @@ public class addProductController implements Initializable {
     private TableColumn<Part, String> partNameCol;
 
     @FXML
-    private TextField productIdTxt;
-
-    @FXML
     private TextField productNameTxt;
-
-    @FXML
-    private Button saveBtn;
 
     @FXML
     private TableView<Part> partTableView;
@@ -92,19 +80,23 @@ public class addProductController implements Initializable {
     @FXML
     private TableView<Part> ascPartView;
 
-
+    /**
+     * Method validates selection, then adds part to tempAscParts
+     */
     @FXML
     void onActionAddAscPart(ActionEvent event) {
 
         if (partTableView.getSelectionModel().getSelectedItem() == null){
             System.out.println("Error: No part selected");
-            return; //runtime Added if statement to catch if no product is selected
+            return;
         }
 
         tempAscParts.add(partTableView.getSelectionModel().getSelectedItem());
-
     }
 
+    /**
+     * Method validates selection, asks user to confirm, then removes associated part
+     */
     @FXML
     void onActionRemoveAscPart(ActionEvent event) {
 
@@ -126,6 +118,9 @@ public class addProductController implements Initializable {
         }
     }
 
+    /**
+     * Calls the data check method, adds a new product according to the validated inputs, and returns to main form
+     */
     @FXML
     void onActionSaveProduct(ActionEvent event) throws IOException {
 
@@ -140,7 +135,6 @@ public class addProductController implements Initializable {
         double price =  Double.parseDouble(productPriceTxt.getText());
         int max =       Integer.parseInt(productMaxTxt.getText());
         int min =       Integer.parseInt(productMinTxt.getText());
-        //todo associated parts
 
         Inventory.addProduct(new Product(id, name, price, inv, min, max, tempAscParts));
         System.out.println("Product added");
@@ -151,6 +145,9 @@ public class addProductController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Returns to Main form without saving
+     */
     @FXML
     void onActionGotoMainForm(ActionEvent event) throws IOException {
 
@@ -160,13 +157,18 @@ public class addProductController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Method sets part table to the search result
+     */
     @FXML
     void onActionPartSearch(ActionEvent event) {
 
         partTableView.setItems(Inventory.lookupPart(searchTxt.getText()));
     }
 
-
+    /**
+     * Initialization method sets all parts and associated parts to tableviews
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -186,6 +188,10 @@ public class addProductController implements Initializable {
 
     }
 
+    /**
+     * Method to validate if input fields conform to standards
+     * @return true if all fields conform to standards
+     */
     public boolean addProductDataCheck(){
 
         Alert checkAlert = new Alert(Alert.AlertType.ERROR);
@@ -233,5 +239,4 @@ public class addProductController implements Initializable {
         }
         return true;
     }
-
 }

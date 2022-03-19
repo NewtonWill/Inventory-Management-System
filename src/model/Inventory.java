@@ -4,72 +4,95 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
+/**
+ * The Inventory class. Houses all parts/products and the filtered parts/products
+ * @author William Newton
+ */
+
 public class Inventory {
 
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
-
     private static ObservableList<Part> filteredParts = FXCollections.observableArrayList();
-    //warning Not defined in UML
     private static ObservableList<Product> filteredProducts = FXCollections.observableArrayList();
-    //warning Not defined in UML
 
     public static int nextPartId = 5000;
 
+    /**
+     * Method generates and returns a unique part ID
+     * @return the next generated part ID
+     */
     public static int getNextPartId(){
         do{
             nextPartId++;
         }
         while (!(lookupPart(nextPartId) == null));
         return nextPartId;
-        //runtime Implemented system to check if any modified part IDs matches nextPartID
-        //vestigial do while loop unnecessary
     }
 
     public static int nextProductId = 1000;
 
+    /**
+     * Method generates and returns a unique product ID
+     * @return the next generated product ID
+     */
     public static int getNextProductId(){
         do{
             nextProductId++;
         }
         while (!(lookupProduct(nextProductId) == null));
         return nextProductId;
-        //runtime Implemented system to check if any modified product IDs matches nextProductID
     }
 
-
+    /**
+     * Method adds part to allParts
+     * @param newPart the part to add to allParts
+     */
     public static void addPart (Part newPart){
         allParts.add(newPart);
     }
 
+    /** Method adds product to allProducts
+     * @param newProduct the product to add to allProducts
+     */
     public static void addProduct (Product newProduct){
         allProducts.add(newProduct);
-
     }
 
+    /**
+     * Searches all parts to find a match with ID
+     * @param partId the part ID to search for
+     * @return the part that matches the ID parameter
+     */
     public static Part lookupPart (int partId){
         for(Part part : getAllParts()){
             if(part.getId() == partId) {
-                //System.out.println("Part ID match Found");
                 return part;
             }
         }
-        //System.out.println("Part Not Found");
         return null;
     }
 
+    /**
+     * Searches all products to find a match with ID
+     * @param productId the product ID to search for
+     * @return the product that matches the ID parameter
+     */
     public static Product lookupProduct (int productId){
         for(Product product : getAllProducts()){
             if(product.getId() == productId) {
-                //System.out.println("Product ID match Found");
                 return product;
             }
         }
-        //System.out.println("Product Not Found");
         return null;
     }
 
+    /**
+     * Creates a list of all parts that match the productName parameter
+     * @param partName the name to match with allProducts list
+     * @return filtered list of matching parts or all parts if no matches are found
+     */
     public static ObservableList<Part> lookupPart (String partName){
 
         if(!(getFilteredParts().isEmpty()))
@@ -103,6 +126,11 @@ public class Inventory {
             return getFilteredParts();
     }
 
+    /**
+     * Creates a list of all products that match the productName parameter
+     * @param productName the name to match with allProducts list
+     * @return filtered list of matching products or all products if no matches are found
+     */
     public static ObservableList<Product> lookupProduct (String productName){
 
         if(!(getFilteredProducts().isEmpty()))
@@ -127,16 +155,31 @@ public class Inventory {
             return getFilteredProducts();
     }
 
+    /**
+     * Method replaces part at index with part parameter
+     * @param index the index of the part to replace
+     * @param selectedPart the part to place at the specified index
+     */
     public static void updatePart (int index, Part selectedPart){
 
         getAllParts().set(index, selectedPart);
     }
 
+    /**
+     * Method replaces product at index with product parameter
+     * @param index the index of the product to replace
+     * @param newProduct the product to place at the specified index
+     */
     public static void updateProduct (int index, Product newProduct){
 
         getAllProducts().set(index, newProduct);
     }
 
+    /**
+     * Method verifies selection, checks for associated parts, then deletes the part
+     * @param selectedPart the part to delete
+     * @return true if the deletion is successful
+     */
     public static boolean deletePart (Part selectedPart){
 
         if (selectedPart == null) {
@@ -154,6 +197,11 @@ public class Inventory {
         return false;
     }
 
+    /**
+     * Method verifies selection, checks for associated parts, then deletes the product
+     * @param selectedProduct the product to delete
+     * @return true if the deletion is successful
+     */
     public static boolean deleteProduct (Product selectedProduct){
 
         if (selectedProduct == null) {
@@ -177,26 +225,39 @@ public class Inventory {
         return false;
     }
 
+    /**
+     * @return all parts
+     */
     public static ObservableList<Part> getAllParts() {
         return allParts;
     }
 
+    /**
+     * @return all products
+     */
     public static ObservableList<Product> getAllProducts() {
         return allProducts;
     }
 
-
-
+    /**
+     * @return all filtered parts
+     */
     public static ObservableList<Part> getFilteredParts() {
         return filteredParts;
-        //warning Not defined in UML
     }
 
+    /**
+     * @return all filtered products
+     */
     public static ObservableList<Product> getFilteredProducts() {
         return filteredProducts;
-        //warning Not defined in UML
     }
 
+    /**
+     * Method to test if a given string is an integer
+     * @param string the string to test
+     * @return true if the string is an integer
+     */
     public static boolean isInteger(String string)
     {
         try
@@ -210,6 +271,11 @@ public class Inventory {
         }
     }
 
+    /**
+     * Method to test if a given string is a double
+     * @param string the string to test
+     * @return true if the string is a double
+     */
     public static boolean isDouble(String string)
     {
         try

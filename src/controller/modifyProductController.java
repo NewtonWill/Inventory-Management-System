@@ -22,7 +22,10 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-
+/**
+ * The Modify Product Controller
+ * @author William Newton
+ */
 public class modifyProductController implements Initializable {
 
     Stage stage;
@@ -51,9 +54,6 @@ public class modifyProductController implements Initializable {
     private TextField productPriceTxt;
 
     @FXML
-    private Button addBtn;
-
-    @FXML
     private TextField productMaxTxt;
 
     @FXML
@@ -61,9 +61,6 @@ public class modifyProductController implements Initializable {
 
     @FXML
     private TableColumn<Part, Integer> ascIdCol;
-
-    @FXML
-    private Button removeAscBtn;
 
     @FXML
     private TextField productMinTxt;
@@ -81,14 +78,14 @@ public class modifyProductController implements Initializable {
     private TextField productNameTxt;
 
     @FXML
-    private Button saveBtn;
-
-    @FXML
     private TableView<Part> partTableView;
 
     @FXML
     private TableView<Part> ascTableView;
 
+    /**
+     * Method verifies selection, then adds part to tempAscParts
+     */
     @FXML
     void onActionAddAscPart(ActionEvent event) {
 
@@ -100,6 +97,9 @@ public class modifyProductController implements Initializable {
         tempAscParts.add(partTableView.getSelectionModel().getSelectedItem());
     }
 
+    /**
+     * Method verifies selection, asks user for confirmation
+     */
     @FXML
     void onActionRemoveAscPart(ActionEvent event) {
 
@@ -121,6 +121,9 @@ public class modifyProductController implements Initializable {
         }
     }
 
+    /**
+     * Calls the data check method, replaces product according to the validated inputs, and returns to main form
+     */
     @FXML
     void onActionSaveProduct(ActionEvent event) throws IOException {
 
@@ -148,6 +151,9 @@ public class modifyProductController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Returns to Main form without saving
+     */
     @FXML
     void onActionGotoMainForm(ActionEvent event) throws IOException {
 
@@ -157,6 +163,10 @@ public class modifyProductController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Method is used by external form to transfer product to modify product form
+     * @param product the part to be sent to modify part form
+     */
     public void sendProduct(Product product) {
         productIdTxt.setText(String.valueOf(product.getId()));
         productNameTxt.setText(product.getName());
@@ -170,12 +180,18 @@ public class modifyProductController implements Initializable {
         ascTableView.setItems(tempAscParts);
     }
 
+    /**
+     * Method sets part table to the search result
+     */
     @FXML
     void onActionPartSearch(ActionEvent event) {
 
         partTableView.setItems(Inventory.lookupPart(searchTxt.getText()));
     }
 
+    /**
+     * Initialization method sets all parts and associated parts to tableviews
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -195,6 +211,10 @@ public class modifyProductController implements Initializable {
 
     }
 
+    /**
+     * Method to validate if input fields conform to standards
+     * @return true if all fields conform to standards
+     */
     public boolean modProductDataCheck(){
 
         Alert checkAlert = new Alert(Alert.AlertType.ERROR);
@@ -242,5 +262,4 @@ public class modifyProductController implements Initializable {
         }
         return true;
     }
-
 }

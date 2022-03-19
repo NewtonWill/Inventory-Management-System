@@ -18,7 +18,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
+/**
+ * The Modify Part Controller
+ * @author William Newton
+ */
 public class modifyPartController implements Initializable {
 
     Stage stage;
@@ -40,9 +43,6 @@ public class modifyPartController implements Initializable {
     private TextField altIdTxt;
 
     @FXML
-    private Button cancelBtn;
-
-    @FXML
     private TextField partMinTxt;
 
     @FXML
@@ -57,9 +57,9 @@ public class modifyPartController implements Initializable {
     @FXML
     private RadioButton outsourceRadio;
 
-    @FXML
-    private Button saveBtn;
-
+    /**
+     * Calls the data check method, replaces part according to the validated inputs, and returns to main form
+     */
     @FXML
     void onActionSavePart(ActionEvent event) throws IOException{
 
@@ -113,6 +113,9 @@ public class modifyPartController implements Initializable {
         }
     }
 
+    /**
+     * Returns to Main form without saving
+     */
     @FXML
     void onActionGotoMainForm(ActionEvent event) throws IOException {
 
@@ -122,6 +125,10 @@ public class modifyPartController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Method is used by external form to transfer part to modify part form
+     * @param part the form to send to modifyPartController
+     */
     public void sendPart(Part part) {
         partIdTxt.setText(String.valueOf(part.getId()));
         partNameTxt.setText(part.getName());
@@ -139,22 +146,35 @@ public class modifyPartController implements Initializable {
         }
     }
 
+    /**
+     * Method sets label text appropriately according to the radio button
+     */
     @FXML
     void onActionInHouse() {
         altIdLabel.setText("Machine ID");
     }
 
+    /**
+     * Method sets label text appropriately according to the radio button
+     */
     @FXML
     void onActionOutsourced() {
         altIdLabel.setText("Company Name");
     }
 
 
+    /**
+     * Initialization method
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
     }
 
+    /**
+     * Method to validate if input fields conform to standards
+     * @return true if all fields conform to standards
+     */
     public boolean modPartDataCheck() {
         //runtime Future Enhancement
         // A good thing to work on in the future is to create a global version of

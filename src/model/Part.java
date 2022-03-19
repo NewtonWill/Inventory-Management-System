@@ -1,11 +1,8 @@
 package model;
-/**
-* Supplied class Part.java 
- */
 
 /**
- *
- * @author Place Your Name Here
+ * The Part Class
+ * @author William Newton
  */
 public abstract class Part {
     private int id;
