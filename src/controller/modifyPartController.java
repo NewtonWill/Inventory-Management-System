@@ -20,6 +20,12 @@ import java.util.ResourceBundle;
 
 /**
  * The Modify Part Controller
+ * <p><b>
+ * Runtime error: Number Format Exception error had occurred within onActionSavePart due to the line
+ * "int machineId = Integer.parseInt(altIdTxt.getText());" placed among other variable settings. Though the
+ * data check function would already account for whichever radio button was selected, this method could
+ * not do so until the line was placed within the specific if/else statements.
+ * </b></p>
  * @author William Newton
  */
 public class modifyPartController implements Initializable {
@@ -74,9 +80,6 @@ public class modifyPartController implements Initializable {
         double price =  Double.parseDouble(partPriceTxt.getText());
         int max =       Integer.parseInt(partMaxTxt.getText());
         int min =       Integer.parseInt(partMinTxt.getText());
-        //runtime Error had occurred when adding new outsourced using non-int in altIDTxt
-        // caused by "int machineId = Integer.parseInt(altIdTxt.getText());" placed here.
-        // resolved by containing line within specified if statement
 
         int currentIndex = Inventory.getAllParts().indexOf(Inventory.lookupPart(id));
 
@@ -172,16 +175,17 @@ public class modifyPartController implements Initializable {
     }
 
     /**
-     * Method to validate if input fields conform to standards
+     * Method to validate if input fields conform to standards.
+     * <p><b>
+     * Future enhancement: A good thing to work on in the future is to create a global version of
+     * this function to check values for add/mod of parts and products in inventory
+     * that would take parameters instead of directly from the fxml areas.
+     * This could be useful to reduce code redundancy and allow for expansion
+     * of other objects beyond Parts and Products
+     * </b></p>
      * @return true if all fields conform to standards
      */
     public boolean modPartDataCheck() {
-        //runtime Future Enhancement
-        // A good thing to work on in the future is to create a global version of
-        // this function to check values for add/mod of parts and products in inventory
-        // that would take parameters instead of directly from the fxml areas
-        // It may also be beneficial to implement try/catch handlers for
-        // certain exceptions
 
         Alert checkAlert = new Alert(Alert.AlertType.ERROR);
         checkAlert.setTitle("Product Not Deleted");
