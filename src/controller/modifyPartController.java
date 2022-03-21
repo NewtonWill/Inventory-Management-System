@@ -142,10 +142,12 @@ public class modifyPartController implements Initializable {
         if (part instanceof InHouse) { //used to check if instanceOf inhouse or outsourced to set altIdtxt and set radio buttons
             altIdTxt.setText(String.valueOf(((InHouse) part).getMachineId()));
             inhouseRadio.setSelected(true);
+            altIdLabel.setText("Machine ID");
         }
         else {
             altIdTxt.setText(((Outsourced) part).getCompanyName());
             outsourceRadio.setSelected(true);
+            altIdLabel.setText("Company Name");
         }
     }
 
