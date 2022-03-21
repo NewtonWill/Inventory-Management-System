@@ -104,14 +104,15 @@ public class Inventory {
                 System.out.println(partx.getName() + " added via name");
             }
 
-            try {
-                if (partx.getId() == (Integer.parseInt(partName))) {
-                    getFilteredParts().add(partx);
-                    System.out.println(partx.getName() + " added via ID");
+            else {
+                try {
+                    if (partx.getId() == (Integer.parseInt(partName))) {
+                        getFilteredParts().add(partx);
+                        System.out.println(partx.getName() + " added via ID number");
+                    }
+                } catch (NumberFormatException ignored) {
+                    //Ignored: empty catch
                 }
-            }
-            catch (NumberFormatException e) {
-                //e.printStackTrace();
             }
         }
 
@@ -140,7 +141,18 @@ public class Inventory {
 
             if(productx.getName().contains(productName)){
                 getFilteredProducts().add(productx);
-                System.out.println(productx.getName() + " added");
+                System.out.println(productx.getName() + " added via name");
+            }
+            else {
+                try{
+                    if(productx.getId() == Integer.parseInt(productName)){
+                        getFilteredProducts().add(productx);
+                        System.out.println(productx.getName() + " added via ID number");
+                    }
+                }
+                catch (NumberFormatException ignored){
+                    //Ignored: empty catch
+                }
             }
         }
 
